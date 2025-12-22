@@ -1,8 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, User } from "lucide-react";
+import dynamic from "next/dynamic";
+
+// Dynamically import PdfThumbnail with SSR disabled to avoid DOMMatrix error
+const PdfThumbnail = dynamic(() => import("./PdfThumbnail"), {
+    ssr: false,
+    loading: () => <div className="w-full h-full bg-slate-100 animate-pulse" />
+});
 
 interface ResearchCardProps {
     title: string;
@@ -14,10 +23,12 @@ interface ResearchCardProps {
 }
 
 export function ResearchCard({ title, excerpt, date, category, href, image }: ResearchCardProps) {
+    const isPdf = href.toLowerCase().endsWith('.pdf');
+
     return (
-        <Card className="flex flex-col overflow-hidden border-border/50 bg-card transition-all hover:shadow-lg h-full">
+        <Card className="flex flex-col overflow-hidden border-border/50 bg-card transition-all hover:shadow-lg h-full group">
             <CardHeader className="p-0">
-                <div className="aspect-[16/9] w-full bg-muted/50 relative overflow-hidden">
+                <div className="aspect-[16/9] w-full bg-muted/50 relative overflow-hidden flex items-center justify-center">
                     {image ? (
                         <Image
                             src={image}
@@ -25,6 +36,10 @@ export function ResearchCard({ title, excerpt, date, category, href, image }: Re
                             fill
                             className="object-cover transition-transform duration-500 hover:scale-105"
                         />
+                    ) : isPdf ? (
+                        <Link href={href} className="w-full h-full block">
+                            <PdfThumbnail url={href} />
+                        </Link>
                     ) : (
                         <div className="w-full h-full bg-slate-800" />
                     )}

@@ -79,9 +79,9 @@ export default function Home() {
           </p>
           <div className="relative w-full flex justify-center">
             <img
-              src="/latest-insights.png"
+              src="/latest-insights-new.jpg"
               alt="Latest Insights - ABCG Research invited by IRF"
-              className="h-[350px] w-auto object-contain rounded-xl shadow-xl border border-border/50"
+              className="w-full h-auto object-contain rounded-xl shadow-xl border border-border/50"
             />
           </div>
           <Link

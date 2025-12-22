@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { FOOTER_INFO } from "@/lib/constants";
 import { useState } from "react";
+import { submitForm } from "@/actions/submit-form";
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -23,15 +24,26 @@ export default function ContactPage() {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulate form submission
-        setTimeout(() => {
-            setIsSubmitting(false);
+        try {
+            const formDataToSend = new FormData();
+            formDataToSend.append('name', formData.name);
+            formDataToSend.append('email', formData.email);
+            formDataToSend.append('subject', formData.subject);
+            formDataToSend.append('message', formData.message);
+
+            await submitForm('Contact Us', formDataToSend);
+
             setSubmitStatus("success");
             setFormData({ name: "", email: "", subject: "", message: "" });
 
             // Reset success message after 5 seconds
             setTimeout(() => setSubmitStatus("idle"), 5000);
-        }, 1000);
+        } catch (error) {
+            console.error(error);
+            setSubmitStatus("error");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

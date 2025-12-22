@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { submitForm } from "@/actions/submit-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -28,12 +29,25 @@ export default function MedisurePage() {
         message: ""
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Handle form submission
-        console.log("Form submitted:", formData);
-        alert("Thank you! Your inquiry has been received.");
-        setFormData({ firstName: "", middleName: "", lastName: "", email: "", message: "" });
+
+        try {
+            const formDataToSend = new FormData();
+            formDataToSend.append('firstName', formData.firstName);
+            formDataToSend.append('middleName', formData.middleName);
+            formDataToSend.append('lastName', formData.lastName);
+            formDataToSend.append('email', formData.email);
+            formDataToSend.append('message', formData.message);
+
+            await submitForm('Medisure', formDataToSend);
+
+            alert("Thank you! Your inquiry has been received.");
+            setFormData({ firstName: "", middleName: "", lastName: "", email: "", message: "" });
+        } catch (error) {
+            console.error(error);
+            alert("Failed to submit form. Please try again.");
+        }
     };
 
     return (
