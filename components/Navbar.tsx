@@ -14,7 +14,7 @@ import {
     NavigationMenuTrigger,
     navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { NAV_LINKS, NAVBAR_CTA } from "@/lib/constants";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ChevronDown } from "lucide-react";
@@ -88,47 +88,73 @@ export function Navbar() {
                 {/* Mobile Menu */}
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                     <SheetTrigger asChild className="md:hidden">
-                        <Button variant="ghost" size="icon">
+                        <Button variant="ghost" size="icon" className="text-foreground">
                             <Menu className="h-6 w-6" />
                             <span className="sr-only">Toggle menu</span>
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side="right">
-                        <nav className="flex flex-col gap-4 mt-8">
-                            {NAV_LINKS.map((link) => (
-                                <div key={link.title} className="flex flex-col gap-2">
-                                    {link.items ? (
-                                        <>
-                                            <h4 className="font-semibold text-lg">{link.title}</h4>
-                                            {link.items.map((item) => (
-                                                <Link
-                                                    key={item.title}
-                                                    href={item.href}
-                                                    className="text-muted-foreground hover:text-primary transition-colors pl-4"
-                                                    onClick={() => setIsOpen(false)}
-                                                >
-                                                    {item.title}
-                                                </Link>
-                                            ))}
-                                        </>
-                                    ) : (
-                                        <Link
-                                            href={link.href}
-                                            className="font-semibold text-lg hover:text-primary transition-colors"
-                                            onClick={() => setIsOpen(false)}
-                                        >
-                                            {link.title}
-                                        </Link>
-                                    )}
-                                </div>
-                            ))}
-                            <Link href="/contact">
-                                <Button className="mt-4 w-full">Contact Us</Button>
-                            </Link>
-                            <div className="mt-4 flex justify-center"> {/* Added ModeToggle to mobile menu */}
-                                <ModeToggle />
+                    <SheetContent side="right" className="w-[300px] sm:w-[350px] p-0 border-l border-border/50 bg-background/95 backdrop-blur-xl">
+                        <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
+                        <div className="flex flex-col h-full">
+                            {/* Mobile Header with Logo */}
+                            <div className="p-6 border-b border-border/10">
+                                <Link href="/" onClick={() => setIsOpen(false)}>
+                                    <Image
+                                        src="/logo-header.png"
+                                        alt="ABCG Research Logo"
+                                        width={160}
+                                        height={50}
+                                        className="h-12 w-auto object-contain"
+                                    />
+                                </Link>
                             </div>
-                        </nav>
+
+                            {/* Navigation Links */}
+                            <nav className="flex-1 overflow-y-auto py-6 px-6 flex flex-col gap-6">
+                                {NAV_LINKS.map((link) => (
+                                    <div key={link.title} className="flex flex-col gap-3">
+                                        {link.items ? (
+                                            <>
+                                                <h4 className="font-bold text-lg text-foreground/90 tracking-wide">{link.title}</h4>
+                                                <div className="flex flex-col gap-3 pl-4 border-l-2 border-primary/20">
+                                                    {link.items.map((item) => (
+                                                        <Link
+                                                            key={item.title}
+                                                            href={item.href}
+                                                            className="text-muted-foreground hover:text-primary transition-colors text-base font-medium py-1"
+                                                            onClick={() => setIsOpen(false)}
+                                                        >
+                                                            {item.title}
+                                                        </Link>
+                                                    ))}
+                                                </div>
+                                            </>
+                                        ) : (
+                                            <Link
+                                                href={link.href}
+                                                className="font-bold text-lg text-foreground/90 hover:text-primary transition-colors tracking-wide"
+                                                onClick={() => setIsOpen(false)}
+                                            >
+                                                {link.title}
+                                            </Link>
+                                        )}
+                                    </div>
+                                ))}
+                            </nav>
+
+                            {/* Mobile Footer Area */}
+                            <div className="p-6 border-t border-border/10 bg-muted/5 space-y-6">
+                                <Link href="/contact" onClick={() => setIsOpen(false)}>
+                                    <Button className="w-full text-base font-semibold py-6 shadow-lg shadow-primary/20" size="lg">
+                                        Contact Us
+                                    </Button>
+                                </Link>
+                                <div className="flex items-center justify-between px-2">
+                                    <span className="text-sm font-medium text-muted-foreground">Theme</span>
+                                    <ModeToggle />
+                                </div>
+                            </div>
+                        </div>
                     </SheetContent>
                 </Sheet>
             </div>

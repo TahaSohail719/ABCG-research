@@ -79,16 +79,20 @@ export default function AdminPage() {
         const { active, over } = event;
 
         if (over && active.id !== over.id) {
+            let newOrder: Report[] = [];
+
+            // Calculate new order synchronously first
             setReports((items) => {
                 const oldIndex = items.findIndex((item) => item.id === active.id);
                 const newIndex = items.findIndex((item) => item.id === over.id);
-                const newOrder = arrayMove(items, oldIndex, newIndex);
-
-                // Save new order to server
-                reorderReports(newOrder); // Fire and forget (or handle error)
-
+                newOrder = arrayMove(items, oldIndex, newIndex);
                 return newOrder;
             });
+
+            // Call server action outside of the setState callback
+            if (newOrder.length > 0) {
+                await reorderReports(newOrder);
+            }
         }
     };
 

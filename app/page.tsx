@@ -8,33 +8,29 @@ import { ForexExpoGallery } from "@/components/ForexExpoGallery";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-export default function Home() {
-  const recentResearch = [
-    {
-      title: "Trade Turbulence & Economic Recalibration: Q2 Outlook Under Pressure",
-      date: "Oct 12, 2025",
-      category: "Macro Strategy",
-      excerpt: "Analyzing the escalating trade tensions and their direct impact on global supply chains and central bank policy recalibrations.",
-      href: "/research/trading-turbulence",
-      image: "/research/trading-turbulence.jpg",
-    },
-    {
-      title: "Global Markets on Edge: Inflation, Trade Wars & Policy Shifts",
-      date: "Oct 10, 2025",
-      category: "Global Markets",
-      excerpt: "An in-depth analysis of renewed inflationary pressures and the escalating trade tensions reshaping the global economic landscape.",
-      href: "/research/global-markets-edge",
-      image: "/research/global-markets-edge.jpg",
-    },
-    {
-      title: "Global Markets in Flux: Dollar Slides, Euro Eyes Key Levels",
-      date: "Oct 05, 2025",
-      category: "FX Analysis",
-      excerpt: "Technical and fundamental breakdown of the US Dollar's recent weakness and the critical resistance levels for the Euro.",
-      href: "/research/global-markets-flux",
-      image: "/research/global-markets-flux.jpg",
-    },
-  ];
+// Hardcoded URL for debugging/fix similar to Research Page
+const DIRECT_REPORTS_URL = "https://zgwftklqzehf5aam.public.blob.vercel-storage.com/reports.json";
+
+export default async function Home() {
+  let recentResearch: any[] = [];
+
+  try {
+    const res = await fetch(DIRECT_REPORTS_URL, { next: { tags: ['reports'] }, cache: 'no-store' });
+    if (res.ok) {
+      const allReports = await res.json();
+      // Sort newest first
+      // @ts-ignore
+      allReports.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      // Take top 3
+      recentResearch = allReports.slice(0, 3);
+    }
+  } catch (error) {
+    console.log("Failed to fetch reports.json for homepage", error);
+  }
+
+  // Fallback to empty if fetch fails
+  // const recentResearch = [ ... ]; // removed hardcoded
+
 
   return (
     <div className="flex flex-col gap-4 md:gap-8 pb-20">
@@ -64,9 +60,22 @@ export default function Home() {
           </Link>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {recentResearch.map((item, idx) => (
-            <ResearchCard key={idx} {...item} />
-          ))}
+          {recentResearch.length > 0 ? (
+            recentResearch.map((item, idx) => (
+              <ResearchCard
+                key={item.id || idx}
+                title={item.title}
+                date={new Date(item.date).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+                category={item.category}
+                excerpt={item.description}
+                href={item.pdfUrl}
+              />
+            ))
+          ) : (
+            <div className="col-span-full text-center text-muted-foreground py-8">
+              <p>Stay tuned for our latest research reports.</p>
+            </div>
+          )}
         </div>
       </section>
 
