@@ -97,8 +97,8 @@ export default function SohailYousafEduPage() {
                                 </div>
                                 <CardTitle className="text-lg font-bold">24h Activation</CardTitle>
                             </CardHeader>
-                            <CardContent className="text-center text-muted-foreground pb-8">
-                                <p>Free & Fast Account Opening.</p>
+                            <CardContent className="text-center text-foreground pb-8 px-4">
+                                <p className="text-lg font-bold">Free & Fast Account Opening.</p>
                             </CardContent>
                         </Card>
 
@@ -111,8 +111,8 @@ export default function SohailYousafEduPage() {
                                 </div>
                                 <CardTitle className="text-lg font-bold">Zero Hassle</CardTitle>
                             </CardHeader>
-                            <CardContent className="text-center text-muted-foreground pb-8">
-                                <p>We handle all Compliance 100% Free.</p>
+                            <CardContent className="text-center text-foreground pb-8 px-4">
+                                <p className="text-lg font-bold">We handle all Compliance 100% Free.</p>
                             </CardContent>
                         </Card>
 
@@ -125,8 +125,8 @@ export default function SohailYousafEduPage() {
                                 </div>
                                 <CardTitle className="text-lg font-bold">Top Brokers</CardTitle>
                             </CardHeader>
-                            <CardContent className="text-center text-muted-foreground pb-8">
-                                <p>Partnered with Pakistan's Best Houses.</p>
+                            <CardContent className="text-center text-foreground pb-8 px-4">
+                                <p className="text-lg font-bold">Partnered with Pakistan's Best Houses.</p>
                             </CardContent>
                         </Card>
 
@@ -139,8 +139,8 @@ export default function SohailYousafEduPage() {
                                 </div>
                                 <CardTitle className="text-lg font-bold">Pro Guidance</CardTitle>
                             </CardHeader>
-                            <CardContent className="text-center text-muted-foreground pb-8">
-                                <p>Expert Analysis for PSX & PMX.</p>
+                            <CardContent className="text-center text-foreground pb-8 px-4">
+                                <p className="text-lg font-bold">Expert Analysis for PSX & PMX.</p>
                             </CardContent>
                         </Card>
                     </div>
