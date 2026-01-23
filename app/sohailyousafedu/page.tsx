@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, Clock, ShieldCheck, TrendingUp, MonitorPlay, UserCheck, Instagram, Facebook, Youtube } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, ShieldCheck, TrendingUp, MonitorPlay, UserCheck, Instagram, Facebook, Youtube, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -70,30 +70,19 @@ export default function SohailYousafEduPage() {
                         <div className="container px-4 md:px-6 pb-4 md:pb-6 flex flex-col items-end justify-end gap-6">
 
                             <div className="flex items-center gap-4">
-                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-pink-500/50 text-pink-500 hover:bg-pink-500 hover:text-white transition-all bg-black/50 backdrop-blur">
-                                    <Instagram className="w-6 h-6" />
-                                    <span className="sr-only">Instagram</span>
-                                </Button>
-                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-blue-600/50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all bg-black/50 backdrop-blur">
-                                    <Facebook className="w-6 h-6" />
-                                    <span className="sr-only">Facebook</span>
-                                </Button>
-                                {/* Tiktok Icon (using a placeholder generic icon if lucide lacks it, or specific svg) */}
-                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-white/50 text-white hover:bg-white hover:text-black transition-all bg-black/50 backdrop-blur">
-                                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                                        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
-                                    </svg>
-                                    <span className="sr-only">TikTok</span>
-                                </Button>
-                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-red-600/50 text-red-600 hover:bg-red-600 hover:text-white transition-all bg-black/50 backdrop-blur">
-                                    <Youtube className="w-6 h-6" />
-                                    <span className="sr-only">YouTube</span>
-                                </Button>
+                                <Link href="https://whatsapp.com/channel/0029VbBnW78IN9iloMgbNF2p" target="_blank" rel="noopener noreferrer">
+                                    <Button size="icon" variant="outline" className="rounded-full w-14 h-14 border-green-500/50 text-green-500 hover:bg-green-500 hover:text-white transition-all bg-black/50 backdrop-blur shadow-[0_0_15px_rgba(34,197,94,0.3)]">
+                                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+                                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.067 2.877 1.215 3.076.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.412 0 12.048c0 2.123.554 4.197 1.604 6.04L0 24l6.096-1.6c1.78.96 3.792 1.488 5.86 1.49l.006.002c6.634 0 12.046-5.415 12.049-12.054a11.848 11.848 0 00-3.488-8.528z" />
+                                        </svg>
+                                        <span className="sr-only">WhatsApp</span>
+                                    </Button>
+                                </Link>
                             </div>
 
-                            <div className="text-white backdrop-blur-sm bg-black/30 p-2 rounded-xl border border-white/5 text-right w-fit">
-                                <h3 className="text-lg font-serif font-bold">Connect with Sohail Yousaf</h3>
-                                <p className="text-xs text-slate-200">Follow for daily market updates and signals</p>
+                            <div className="text-white backdrop-blur-sm bg-black/30 p-3 rounded-xl border border-white/5 text-right w-fit max-w-[300px]">
+                                <h3 className="text-lg font-serif font-bold leading-tight">Join Sohail Yousaf Whatsapp Channel</h3>
+                                <p className="text-xs text-slate-200 mt-1">For latest market updates and signals</p>
                             </div>
                         </div>
                     </div>
@@ -311,6 +300,37 @@ export default function SohailYousafEduPage() {
                     </Card>
                 </div>
             </section>
+
+            {/* Floating WhatsApp Button */}
+            <div className="fixed bottom-6 left-6 z-50 flex flex-col items-start gap-2">
+                <style jsx global>{`
+                    @keyframes blink-shadow {
+                        0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+                        70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+                        100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+                    }
+                    .animate-whatsapp-blink {
+                        animation: blink-shadow 2s infinite;
+                    }
+                `}</style>
+                <Link
+                    href="https://whatsapp.com/channel/0029VbBnW78IN9iloMgbNF2p"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group"
+                >
+                    <div className="flex items-center gap-3 bg-white dark:bg-slate-900 border border-green-500/30 p-2 pr-4 rounded-full shadow-lg hover:shadow-green-500/20 transition-all duration-300 transform hover:-translate-y-1">
+                        <div className="w-12 h-12 bg-[#25D366] rounded-full flex items-center justify-center text-white animate-whatsapp-blink">
+                            <svg viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.067 2.877 1.215 3.076.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.412 0 12.048c0 2.123.554 4.197 1.604 6.04L0 24l6.096-1.6c1.78.96 3.792 1.488 5.86 1.49l.006.002c6.634 0 12.046-5.415 12.049-12.054a11.848 11.848 0 00-3.488-8.528z" />
+                            </svg>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-sm font-bold text-foreground group-hover:text-green-600 transition-colors">Contact us now</span>
+                        </div>
+                    </div>
+                </Link>
+            </div>
         </div>
     );
 }
