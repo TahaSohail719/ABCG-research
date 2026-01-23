@@ -51,34 +51,9 @@ export default function SohailYousafEduPage() {
 
     return (
         <div className="flex flex-col min-h-screen bg-background">
-            {/* Hero Section */}
-            <section className="relative py-24 md:py-32 flex flex-col items-center justify-center text-center overflow-hidden min-h-[70vh]">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-background/70 dark:bg-slate-950/70 z-10" />
-                    <div
-                        className="absolute inset-0 bg-cover bg-center z-0 opacity-70"
-                        style={{ backgroundImage: "url('/network-background.jpg')" }}
-                    />
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background/80 to-background dark:from-brand-navy/60 z-20" />
-                </div>
 
-                <div className="container relative z-30 px-4 md:px-6 flex flex-col items-center gap-6">
-                    <h1 className="font-serif text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-foreground">
-                        AlphaLens AI
-                    </h1>
-                    <p className="max-w-[50rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8 font-light">
-                        <strong>Real-time AI Based market analysis and signals of commodities and currencies.</strong>
-                    </p>
-                    <Link href="https://alphalensai.com/" target="_blank" rel="noopener noreferrer">
-                        <Button size="lg" className="h-12 px-8 text-base bg-[#f26726] hover:bg-[#d9561d] text-white">
-                            Try AlphaLens AI <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
-                    </Link>
-                </div>
-            </section>
-
-            {/* Expert Profile Section */}
-            <section className="w-full bg-background border-y border-border/10">
+            {/* Expert Profile Section - Moved to Top */}
+            <section className="w-full bg-background border-b border-border/10">
                 <div className="w-full group relative">
                     {/* Banner Image */}
                     <div className="relative w-full h-[50vh] md:h-[60vh] lg:h-[70vh] bg-black overflow-hidden">
@@ -120,6 +95,32 @@ export default function SohailYousafEduPage() {
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            {/* Hero Section - Moved Below Expert Profile */}
+            <section className="relative py-24 md:py-32 flex flex-col items-center justify-center text-center overflow-hidden min-h-[50vh]">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-background/70 dark:bg-slate-950/70 z-10" />
+                    <div
+                        className="absolute inset-0 bg-cover bg-center z-0 opacity-70"
+                        style={{ backgroundImage: "url('/network-background.jpg')" }}
+                    />
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background/80 to-background dark:from-brand-navy/60 z-20" />
+                </div>
+
+                <div className="container relative z-30 px-4 md:px-6 flex flex-col items-center gap-6">
+                    <h1 className="font-serif text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-foreground">
+                        AlphaLens AI
+                    </h1>
+                    <p className="max-w-[50rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8 font-light">
+                        <strong>Real-time AI Based market analysis and signals of commodities and currencies.</strong>
+                    </p>
+                    <Link href="https://alphalensai.com/" target="_blank" rel="noopener noreferrer">
+                        <Button size="lg" className="h-12 px-8 text-base bg-[#f26726] hover:bg-[#d9561d] text-white">
+                            Try AlphaLens AI <ArrowRight className="ml-2 h-4 w-4" />
+                        </Button>
+                    </Link>
                 </div>
             </section>
 
