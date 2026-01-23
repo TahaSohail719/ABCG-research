@@ -8,12 +8,12 @@ const SUBMISSIONS_JSON_PATH = "submissions.json";
 
 export interface Submission {
     id: string;
-    type: 'Contact Us' | 'Medisure' | 'Contact' | 'Engagement'; // Keeping old types for backward compatibility locally
+    type: 'Contact Us' | 'Medisure' | 'Contact' | 'Engagement' | 'Sohail Yousaf Edu'; // Keeping old types for backward compatibility locally
     data: Record<string, string>;
     date: string;
 }
 
-export async function submitForm(type: 'Contact Us' | 'Medisure' | 'Contact' | 'Engagement', formData: FormData) {
+export async function submitForm(type: 'Contact Us' | 'Medisure' | 'Contact' | 'Engagement' | 'Sohail Yousaf Edu', formData: FormData) {
     // Extract all data from formData
     const data: Record<string, string> = {};
     formData.forEach((value, key) => {

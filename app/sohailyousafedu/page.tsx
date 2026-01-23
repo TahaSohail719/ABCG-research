@@ -56,8 +56,8 @@ export default function SohailYousafEduPage() {
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-background/70 dark:bg-slate-950/70 z-10" />
                     <div
-                        className="absolute inset-0 bg-cover bg-center z-0 opacity-60"
-                        style={{ backgroundImage: "url('/finance-hero-main.png')" }}
+                        className="absolute inset-0 bg-cover bg-center z-0 opacity-70"
+                        style={{ backgroundImage: "url('/network-background.jpg')" }}
                     />
                     <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background/80 to-background dark:from-brand-navy/60 z-20" />
                 </div>
@@ -67,7 +67,7 @@ export default function SohailYousafEduPage() {
                         AlphaLens AI
                     </h1>
                     <p className="max-w-[50rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8 font-light">
-                        Real-time AI Based market analysis and signals of commodities and currencies.
+                        <strong>Real-time AI Based market analysis and signals of commodities and currencies.</strong>
                     </p>
                     <Link href="https://alphalensai.com/" target="_blank" rel="noopener noreferrer">
                         <Button size="lg" className="h-12 px-8 text-base bg-[#f26726] hover:bg-[#d9561d] text-white">
@@ -77,62 +77,70 @@ export default function SohailYousafEduPage() {
                 </div>
             </section>
 
-            {/* Account Opening Section */}
+            {/* Account Opening Section - Revamped */}
             <section className="py-20 bg-muted/30">
                 <div className="container px-4 md:px-6">
-                    <div className="flex flex-col items-center text-center space-y-4 mb-12">
+                    <div className="flex flex-col items-center text-center space-y-4 mb-16">
                         <h2 className="text-3xl font-bold font-serif tracking-tight">Trade with Confidence</h2>
                         <p className="text-muted-foreground max-w-2xl">
-                            Unlock the potential of Pakistan Stock Exchange (PSX) and Pakistan Mercantile Exchange (PMX) with our expert guidance.
+                            Unlock the potential of PSX and PMX with our expert guidance.
                         </p>
                     </div>
 
-                    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-                        <Card className="bg-background/60 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all">
-                            <CardHeader className="text-center pb-2">
-                                <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-                                    <Clock className="w-6 h-6" />
+                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                        {/* 24h Account Opening */}
+                        <Card className="group relative overflow-hidden border-none shadow-lg bg-background hover:-translate-y-2 transition-all duration-300">
+                            <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-blue-500 to-cyan-500" />
+                            <CardHeader className="text-center pt-8 pb-4">
+                                <div className="mx-auto w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-600 mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <Clock className="w-8 h-8" />
                                 </div>
-                                <CardTitle className="text-xl font-serif">24h Account Opening</CardTitle>
+                                <CardTitle className="text-lg font-bold">24h Activation</CardTitle>
                             </CardHeader>
-                            <CardContent className="text-center text-muted-foreground text-sm">
-                                Get started quickly. We streamline the process to get your account engaged within 24 hours.
+                            <CardContent className="text-center text-muted-foreground pb-8">
+                                <p>Free & Fast Account Opening.</p>
                             </CardContent>
                         </Card>
 
-                        <Card className="bg-background/60 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all">
-                            <CardHeader className="text-center pb-2">
-                                <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-                                    <ShieldCheck className="w-6 h-6" />
+                        {/* Full Compliance */}
+                        <Card className="group relative overflow-hidden border-none shadow-lg bg-background hover:-translate-y-2 transition-all duration-300">
+                            <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-500" />
+                            <CardHeader className="text-center pt-8 pb-4">
+                                <div className="mx-auto w-16 h-16 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-600 mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <ShieldCheck className="w-8 h-8" />
                                 </div>
-                                <CardTitle className="text-xl font-serif">Full Compliance</CardTitle>
+                                <CardTitle className="text-lg font-bold">Zero Hassle</CardTitle>
                             </CardHeader>
-                            <CardContent className="text-center text-muted-foreground text-sm">
-                                Hassle-free documentation. Just submit your documents, and our team handles all compliance checks for free.
+                            <CardContent className="text-center text-muted-foreground pb-8">
+                                <p>We handle all Compliance 100% Free.</p>
                             </CardContent>
                         </Card>
 
-                        <Card className="bg-background/60 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all">
-                            <CardHeader className="text-center pb-2">
-                                <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-                                    <TrendingUp className="w-6 h-6" />
+                        {/* Best Brokerage */}
+                        <Card className="group relative overflow-hidden border-none shadow-lg bg-background hover:-translate-y-2 transition-all duration-300">
+                            <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-orange-500 to-red-500" />
+                            <CardHeader className="text-center pt-8 pb-4">
+                                <div className="mx-auto w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-600 mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <TrendingUp className="w-8 h-8" />
                                 </div>
-                                <CardTitle className="text-xl font-serif">Best Brokerage</CardTitle>
+                                <CardTitle className="text-lg font-bold">Top Brokers</CardTitle>
                             </CardHeader>
-                            <CardContent className="text-center text-muted-foreground text-sm">
-                                We partner with the top-rated brokerage houses in Pakistan to ensure security and reliability for your funds.
+                            <CardContent className="text-center text-muted-foreground pb-8">
+                                <p>Partnered with Pakistan's Best Houses.</p>
                             </CardContent>
                         </Card>
 
-                        <Card className="bg-background/60 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all">
-                            <CardHeader className="text-center pb-2">
-                                <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
-                                    <UserCheck className="w-6 h-6" />
+                        {/* Expert Guidance */}
+                        <Card className="group relative overflow-hidden border-none shadow-lg bg-background hover:-translate-y-2 transition-all duration-300">
+                            <div className="absolute top-0 w-full h-1 bg-gradient-to-r from-purple-500 to-indigo-500" />
+                            <CardHeader className="text-center pt-8 pb-4">
+                                <div className="mx-auto w-16 h-16 rounded-2xl bg-purple-500/10 flex items-center justify-center text-purple-600 mb-4 group-hover:scale-110 transition-transform duration-300">
+                                    <UserCheck className="w-8 h-8" />
                                 </div>
-                                <CardTitle className="text-xl font-serif">Expert Guidance</CardTitle>
+                                <CardTitle className="text-lg font-bold">Pro Guidance</CardTitle>
                             </CardHeader>
-                            <CardContent className="text-center text-muted-foreground text-sm">
-                                Receive expert market analysis and guidance for beginners to navigate the market effectively.
+                            <CardContent className="text-center text-muted-foreground pb-8">
+                                <p>Expert Analysis for PSX & PMX.</p>
                             </CardContent>
                         </Card>
                     </div>
