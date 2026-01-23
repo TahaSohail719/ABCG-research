@@ -67,11 +67,8 @@ export default function SohailYousafEduPage() {
 
                     {/* Social Links Overlay or Bar - Positioned at bottom container */}
                     <div className="absolute bottom-0 left-0 right-0 z-20">
-                        <div className="container px-4 md:px-6 pb-8 md:pb-12 flex flex-col md:flex-row items-center justify-between gap-6">
-                            <div className="text-white backdrop-blur-sm bg-black/30 p-4 rounded-xl border border-white/10">
-                                <h3 className="text-2xl font-serif font-bold">Connect with Sohail Yousaf</h3>
-                                <p className="text-sm text-slate-200">Follow for daily market updates and signals</p>
-                            </div>
+                        <div className="container px-4 md:px-6 pb-8 md:pb-12 flex flex-col items-center justify-center gap-6">
+
                             <div className="flex items-center gap-4">
                                 <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-pink-500/50 text-pink-500 hover:bg-pink-500 hover:text-white transition-all bg-black/50 backdrop-blur">
                                     <Instagram className="w-6 h-6" />
@@ -93,36 +90,17 @@ export default function SohailYousafEduPage() {
                                     <span className="sr-only">YouTube</span>
                                 </Button>
                             </div>
+
+                            <div className="text-white backdrop-blur-sm bg-black/30 p-2 rounded-xl border border-white/5 text-center">
+                                <h3 className="text-lg font-serif font-bold">Connect with Sohail Yousaf</h3>
+                                <p className="text-xs text-slate-200">Follow for daily market updates and signals</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Hero Section - Moved Below Expert Profile */}
-            <section className="relative py-24 md:py-32 flex flex-col items-center justify-center text-center overflow-hidden min-h-[50vh]">
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-background/70 dark:bg-slate-950/70 z-10" />
-                    <div
-                        className="absolute inset-0 bg-cover bg-center z-0 opacity-70"
-                        style={{ backgroundImage: "url('/network-background.jpg')" }}
-                    />
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background/80 to-background dark:from-brand-navy/60 z-20" />
-                </div>
 
-                <div className="container relative z-30 px-4 md:px-6 flex flex-col items-center gap-6">
-                    <h1 className="font-serif text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-foreground">
-                        AlphaLens AI
-                    </h1>
-                    <p className="max-w-[50rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8 font-light">
-                        <strong>Real-time AI Based market analysis and signals of commodities and currencies.</strong>
-                    </p>
-                    <Link href="https://alphalensai.com/" target="_blank" rel="noopener noreferrer">
-                        <Button size="lg" className="h-12 px-8 text-base bg-[#f26726] hover:bg-[#d9561d] text-white">
-                            Try AlphaLens AI <ArrowRight className="ml-2 h-4 w-4" />
-                        </Button>
-                    </Link>
-                </div>
-            </section>
 
             {/* Account Opening Section - Revamped */}
             <section className="py-20 bg-muted/30">
