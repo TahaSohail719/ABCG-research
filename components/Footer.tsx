@@ -1,16 +1,45 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { FOOTER_INFO } from "@/lib/constants";
 import { Linkedin, Instagram } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export function Footer() {
+    const pathname = usePathname();
+
+    const isMedisure = pathname === '/medisure';
+
+    const getLocations = () => {
+        let locations = [...FOOTER_INFO.locations];
+
+        if (isMedisure) {
+            // Remove Pakistan address (first one based on inspection) or filter by content
+            locations = locations.filter(loc => !loc.toLowerCase().includes("pakistan"));
+        }
+
+        return locations;
+    };
+
+    const displayLocations = getLocations();
+
+    const footerTitle = isMedisure ? "MediSure" : "ABCG Research";
+    const footerSubtitle = isMedisure ? <span className="text-sm font-sans font-normal ml-2 text-muted-foreground block sm:inline">a division of ABCG Research</span> : null;
+    const footerDesc = isMedisure
+        ? "Empowering healthcare providers with efficient and transparent medical billing solutions."
+        : "Institutional Intelligence. Macro Research, AI-driven analysis, and Global Capital Markets.";
+
     return (
         <footer className="w-full border-t bg-muted/40 pt-12 md:pt-16 lg:pt-24 pb-8 md:pb-10 lg:pb-12">
             <div className="container grid gap-12 px-4 md:px-6 lg:grid-cols-3">
                 <div className="space-y-4 lg:col-span-1">
-                    <h2 className="text-2xl font-serif font-bold tracking-tight">ABCG Research</h2>
+                    <h2 className="text-2xl font-serif font-bold tracking-tight">
+                        {footerTitle}
+                        {footerSubtitle}
+                    </h2>
                     <p className="text-sm text-muted-foreground">
-                        Institutional Intelligence. Macro Research, AI-driven analysis, and Global Capital Markets.
+                        {footerDesc}
                     </p>
                     <div className="flex space-x-4">
                         <Link
@@ -53,7 +82,7 @@ export function Footer() {
                 <div className="space-y-4 lg:col-span-1">
                     <h3 className="text-sm font-semibold uppercase tracking-wider">Contact</h3>
                     <div className="space-y-2 text-sm text-muted-foreground">
-                        {FOOTER_INFO.locations.map((loc, idx) => (
+                        {displayLocations.map((loc, idx) => (
                             <p key={idx} className="leading-relaxed">{loc}</p>
                         ))}
                     </div>

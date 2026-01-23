@@ -46,6 +46,7 @@ export const PERFORMANCE_HIGHLIGHT = {
 export const FOOTER_INFO = {
     locations: [
         "College, 114-A Gul E Daman Society, Lahore, Pakistan",
+        "1401 21st ST # 6614 Sacramento, CA 95811",
         "86, 90 Paul St, London EC2A 4NE, United Kingdom",
         "53 small backyard road, réduit 97114 trois-rivieres, France",
     ],

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,14 +23,18 @@ import { cn } from "@/lib/utils";
 
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const pathname = usePathname();
+    const isMedisure = pathname === "/medisure";
+    const logoSrc = isMedisure ? "/medisure-logo.png" : "/logo-header.png";
+    const logoAlt = isMedisure ? "MediSure" : "ABCG Research Logo";
 
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container flex h-16 items-center justify-between px-4 md:px-6">
                 <Link href="/" className="mr-6 flex items-center space-x-2">
                     <Image
-                        src="/logo-header.png"
-                        alt="ABCG Research Logo"
+                        src={logoSrc}
+                        alt={logoAlt}
                         width={200}
                         height={64}
                         className="h-16 w-auto object-contain"
@@ -100,8 +105,8 @@ export function Navbar() {
                             <div className="p-6 border-b border-border/10">
                                 <Link href="/" onClick={() => setIsOpen(false)}>
                                     <Image
-                                        src="/logo-header.png"
-                                        alt="ABCG Research Logo"
+                                        src={logoSrc}
+                                        alt={logoAlt}
                                         width={160}
                                         height={50}
                                         className="h-12 w-auto object-contain"
