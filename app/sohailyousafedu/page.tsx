@@ -78,41 +78,42 @@ export default function SohailYousafEduPage() {
             </section>
 
             {/* Expert Profile Section */}
-            <section className="py-12 bg-background">
-                <div className="container px-4 md:px-6">
-                    <div className="relative w-full max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl hover:shadow-primary/20 transition-all duration-500 group">
-                        {/* Banner Image */}
-                        <div className="relative aspect-[16/9] md:aspect-[21/9] w-full bg-black">
-                            <img
-                                src="/sohail-profile-banner.png"
-                                alt="Forex Expert Sohail Yousaf - 32 Years in Global Financial Markets"
-                                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
-                            />
-                        </div>
+            <section className="w-full bg-background border-y border-border/10">
+                <div className="w-full group relative">
+                    {/* Banner Image */}
+                    <div className="relative w-full h-[50vh] md:h-[60vh] lg:h-[70vh] bg-black overflow-hidden">
+                        <img
+                            src="/sohail-profile-banner.png"
+                            alt="Forex Expert Sohail Yousaf - 32 Years in Global Financial Markets"
+                            className="w-full h-full object-contain md:object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90" />
+                    </div>
 
-                        {/* Social Links Overlay or Bar */}
-                        <div className="bg-slate-900/90 backdrop-blur-md p-6 flex flex-col md:flex-row items-center justify-between gap-6 border-t border-white/10">
-                            <div className="text-white">
-                                <h3 className="text-xl font-serif font-bold">Connect with Sohail Yousaf</h3>
-                                <p className="text-sm text-slate-400">Follow for daily market updates and signals</p>
+                    {/* Social Links Overlay or Bar - Positioned at bottom container */}
+                    <div className="absolute bottom-0 left-0 right-0 z-20">
+                        <div className="container px-4 md:px-6 pb-8 md:pb-12 flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div className="text-white backdrop-blur-sm bg-black/30 p-4 rounded-xl border border-white/10">
+                                <h3 className="text-2xl font-serif font-bold">Connect with Sohail Yousaf</h3>
+                                <p className="text-sm text-slate-200">Follow for daily market updates and signals</p>
                             </div>
                             <div className="flex items-center gap-4">
-                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-pink-500/50 text-pink-500 hover:bg-pink-500 hover:text-white transition-all bg-transparent">
+                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-pink-500/50 text-pink-500 hover:bg-pink-500 hover:text-white transition-all bg-black/50 backdrop-blur">
                                     <Instagram className="w-6 h-6" />
                                     <span className="sr-only">Instagram</span>
                                 </Button>
-                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-blue-600/50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all bg-transparent">
+                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-blue-600/50 text-blue-600 hover:bg-blue-600 hover:text-white transition-all bg-black/50 backdrop-blur">
                                     <Facebook className="w-6 h-6" />
                                     <span className="sr-only">Facebook</span>
                                 </Button>
                                 {/* Tiktok Icon (using a placeholder generic icon if lucide lacks it, or specific svg) */}
-                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-white/50 text-white hover:bg-white hover:text-black transition-all bg-transparent">
+                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-white/50 text-white hover:bg-white hover:text-black transition-all bg-black/50 backdrop-blur">
                                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                                         <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
                                     </svg>
                                     <span className="sr-only">TikTok</span>
                                 </Button>
-                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-red-600/50 text-red-600 hover:bg-red-600 hover:text-white transition-all bg-transparent">
+                                <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-red-600/50 text-red-600 hover:bg-red-600 hover:text-white transition-all bg-black/50 backdrop-blur">
                                     <Youtube className="w-6 h-6" />
                                     <span className="sr-only">YouTube</span>
                                 </Button>
