@@ -302,7 +302,7 @@ export default function SohailYousafEduPage() {
             </section>
 
             {/* Floating WhatsApp Button */}
-            <div className="fixed bottom-6 left-6 z-50 flex flex-col items-start gap-2">
+            <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
                 <style jsx global>{`
                     @keyframes blink-shadow {
                         0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
@@ -314,7 +314,7 @@ export default function SohailYousafEduPage() {
                     }
                 `}</style>
                 <Link
-                    href="https://whatsapp.com/channel/0029VbBnW78IN9iloMgbNF2p"
+                    href="https://wa.me/923390004920"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group"
