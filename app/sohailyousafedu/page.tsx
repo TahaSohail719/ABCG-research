@@ -67,7 +67,7 @@ export default function SohailYousafEduPage() {
 
                     {/* Social Links Overlay or Bar - Positioned at bottom container */}
                     <div className="absolute bottom-0 left-0 right-0 z-20">
-                        <div className="container px-4 md:px-6 pb-8 md:pb-12 flex flex-col items-center justify-center gap-6">
+                        <div className="container px-4 md:px-6 pb-8 md:pb-12 flex flex-col items-end justify-end gap-6">
 
                             <div className="flex items-center gap-4">
                                 <Button size="icon" variant="outline" className="rounded-full w-12 h-12 border-pink-500/50 text-pink-500 hover:bg-pink-500 hover:text-white transition-all bg-black/50 backdrop-blur">
@@ -91,7 +91,7 @@ export default function SohailYousafEduPage() {
                                 </Button>
                             </div>
 
-                            <div className="text-white backdrop-blur-sm bg-black/30 p-2 rounded-xl border border-white/5 text-center">
+                            <div className="text-white backdrop-blur-sm bg-black/30 p-2 rounded-xl border border-white/5 text-right w-fit">
                                 <h3 className="text-lg font-serif font-bold">Connect with Sohail Yousaf</h3>
                                 <p className="text-xs text-slate-200">Follow for daily market updates and signals</p>
                             </div>
@@ -99,8 +99,6 @@ export default function SohailYousafEduPage() {
                     </div>
                 </div>
             </section>
-
-
 
             {/* Account Opening Section - Revamped */}
             <section className="py-20 bg-muted/30">
