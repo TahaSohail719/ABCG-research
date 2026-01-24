@@ -14,7 +14,15 @@ export default function SohailYousafEduPage() {
         name: "",
         email: "",
         phone: "",
+        motherName: "",
+        accountType: "PSX Account",
         message: "",
+    });
+    const [files, setFiles] = useState<{ [key: string]: File | null }>({
+        cnic: null,
+        signature: null,
+        cheque: null,
+        statement: null,
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
@@ -35,12 +43,22 @@ export default function SohailYousafEduPage() {
             formDataToSend.append('name', formData.name);
             formDataToSend.append('email', formData.email);
             formDataToSend.append('phone', formData.phone);
-            formDataToSend.append('subject', "Sohail Yousaf Edu Inquiry");
-            formDataToSend.append('message', formData.message);
+            formDataToSend.append('motherName', formData.motherName);
+            formDataToSend.append('accountType', formData.accountType);
+            formDataToSend.append('subject', "Sohail Yousaf Edu Account Opening");
+            formDataToSend.append('message', formData.message || "No message provided");
+
+            // Append files
+            if (files.cnic) formDataToSend.append('cnic_document', files.cnic);
+            if (files.signature) formDataToSend.append('signature_document', files.signature);
+            if (files.cheque) formDataToSend.append('cheque_document', files.cheque);
+            if (files.statement) formDataToSend.append('bank_statement', files.statement);
 
             await submitForm('Sohail Yousaf Edu', formDataToSend);
             setSubmitStatus("success");
-            setFormData({ name: "", email: "", phone: "", message: "" });
+            setFormData({ name: "", email: "", phone: "", motherName: "", accountType: "PSX Account", message: "" });
+            setFiles({ cnic: null, signature: null, cheque: null, statement: null });
+            // Reset file inputs manually if needed, or just let the success state handle it
             setTimeout(() => setSubmitStatus("idle"), 5000);
         } catch (error) {
             console.error(error);
@@ -80,11 +98,22 @@ export default function SohailYousafEduPage() {
         }));
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData(prev => ({
             ...prev,
             [e.target.name]: e.target.value
         }));
+    };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const fileName = e.target.name;
+            const file = e.target.files[0];
+            setFiles(prev => ({
+                ...prev,
+                [fileName]: file
+            }));
+        }
     };
 
     return (
@@ -304,19 +333,19 @@ export default function SohailYousafEduPage() {
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="grid gap-6 sm:grid-cols-2">
                                     <div className="space-y-2">
-                                        <label htmlFor="name" className="text-sm font-medium">Full Name</label>
+                                        <label htmlFor="name" className="text-sm font-medium">Full Name <span className="text-destructive">*</span></label>
                                         <Input
                                             id="name"
                                             name="name"
                                             value={formData.name}
                                             onChange={handleChange}
-                                            placeholder="John Doe"
+                                            placeholder="Full Name"
                                             required
                                             className="bg-background"
                                         />
                                     </div>
                                     <div className="space-y-2">
-                                        <label htmlFor="phone" className="text-sm font-medium">Phone Number</label>
+                                        <label htmlFor="phone" className="text-sm font-medium">Phone Number (Registered on CNIC) <span className="text-destructive">*</span></label>
                                         <Input
                                             id="phone"
                                             name="phone"
@@ -329,42 +358,124 @@ export default function SohailYousafEduPage() {
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label htmlFor="email" className="text-sm font-medium">Email Address</label>
-                                    <Input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        value={formData.email}
-                                        onChange={handleChange}
-                                        placeholder="john@example.com"
-                                        required
-                                        className="bg-background"
-                                    />
+                                <div className="grid gap-6 sm:grid-cols-2">
+                                    <div className="space-y-2">
+                                        <label htmlFor="email" className="text-sm font-medium">Email Address <span className="text-destructive">*</span></label>
+                                        <Input
+                                            id="email"
+                                            name="email"
+                                            type="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            placeholder="email@example.com"
+                                            required
+                                            className="bg-background"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label htmlFor="motherName" className="text-sm font-medium">Mother&apos;s Name <span className="text-destructive">*</span></label>
+                                        <Input
+                                            id="motherName"
+                                            name="motherName"
+                                            value={formData.motherName}
+                                            onChange={handleChange}
+                                            placeholder="Mother's Name"
+                                            required
+                                            className="bg-background"
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className="space-y-2">
-                                    <label htmlFor="message" className="text-sm font-medium">Message / Inquiry</label>
+                                    <label htmlFor="accountType" className="text-sm font-medium border-none">Account Type <span className="text-destructive">*</span></label>
+                                    <select
+                                        id="accountType"
+                                        name="accountType"
+                                        value={formData.accountType}
+                                        onChange={handleChange}
+                                        required
+                                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                                    >
+                                        <option value="PSX Account">PSX Account</option>
+                                        <option value="PMEX Account">PMEX Account</option>
+                                        <option value="Both">Both (PSX & PMEX)</option>
+                                    </select>
+                                </div>
+
+                                <div className="grid gap-6 sm:grid-cols-2 pt-4 border-t border-border/50">
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium">CNIC Front/Back Photo <span className="text-destructive">*</span></label>
+                                        <Input
+                                            type="file"
+                                            name="cnic"
+                                            onChange={handleFileChange}
+                                            required
+                                            accept="image/*"
+                                            className="bg-background"
+                                        />
+                                        <p className="text-[10px] text-muted-foreground">Upload picture of CNIC front and back</p>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium">Signature on Plain Paper <span className="text-destructive">*</span></label>
+                                        <Input
+                                            type="file"
+                                            name="signature"
+                                            onChange={handleFileChange}
+                                            required
+                                            accept="image/*"
+                                            className="bg-background"
+                                        />
+                                        <p className="text-[10px] text-muted-foreground">Upload picture of your signature</p>
+                                    </div>
+                                </div>
+
+                                <div className="grid gap-6 sm:grid-cols-2">
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium">Chequebook Page Picture <span className="text-destructive">*</span></label>
+                                        <Input
+                                            type="file"
+                                            name="cheque"
+                                            onChange={handleFileChange}
+                                            required
+                                            accept="image/*"
+                                            className="bg-background"
+                                        />
+                                        <p className="text-[10px] text-muted-foreground">Upload picture of a cheque from your bank</p>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium">Bank Statement</label>
+                                        <Input
+                                            type="file"
+                                            name="statement"
+                                            onChange={handleFileChange}
+                                            accept=".pdf,image/*"
+                                            className="bg-background"
+                                        />
+                                        <p className="text-[10px] text-muted-foreground">Optional: Upload latest bank statement</p>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label htmlFor="message" className="text-sm font-medium">Message (Optional)</label>
                                     <Textarea
                                         id="message"
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
-                                        placeholder="I am interested in opening a PSX account..."
-                                        required
-                                        className="min-h-[120px] bg-background"
+                                        placeholder="Any additional details or questions..."
+                                        className="min-h-[100px] bg-background"
                                     />
                                 </div>
 
                                 {submitStatus === "success" && (
                                     <div className="bg-green-500/10 border border-green-500/20 text-green-500 px-4 py-3 rounded-md text-sm">
-                                        Success! Our team will contact you shortly.
+                                        Application submitted successfully! Our team will contact you shortly.
                                     </div>
                                 )}
 
                                 {submitStatus === "error" && (
                                     <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-md text-sm">
-                                        Something went wrong. Please try again.
+                                        Something went wrong during upload. Please ensure files are not too large and try again.
                                     </div>
                                 )}
 
@@ -374,7 +485,7 @@ export default function SohailYousafEduPage() {
                                     className="w-full bg-[#f26726] hover:bg-[#d9561d] text-white font-bold"
                                     disabled={isSubmitting}
                                 >
-                                    {isSubmitting ? "Submitting..." : "Submit Inquiry"}
+                                    {isSubmitting ? "Uploading Documents..." : "Submit Application"}
                                 </Button>
                             </form>
                         </CardContent>

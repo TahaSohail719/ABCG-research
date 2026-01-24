@@ -16,11 +16,27 @@ export interface Submission {
 export async function submitForm(type: 'Contact Us' | 'Medisure' | 'Contact' | 'Engagement' | 'Sohail Yousaf Edu', formData: FormData) {
     // Extract all data from formData
     const data: Record<string, string> = {};
-    formData.forEach((value, key) => {
+
+    // Process all entries in formData
+    for (const [key, value] of Array.from(formData.entries())) {
         if (typeof value === 'string') {
             data[key] = value;
+        } else if (value instanceof File && value.size > 0) {
+            // Upload file to Vercel Blob
+            try {
+                const blob = await put(`uploads/${Date.now()}-${value.name}`, value, {
+                    access: 'public',
+                    addRandomSuffix: true,
+                });
+                data[key] = blob.url;
+            } catch (err) {
+                console.error(`Failed to upload file ${key}:`, err);
+                // Keep the filename or a placeholder if upload fails? 
+                // Better to throw so user knows upload failed
+                throw new Error(`Failed to upload ${key}. Please try again.`);
+            }
         }
-    });
+    }
 
     // 1. Fetch existing submissions
     let submissions: Submission[] = [];
