@@ -41,7 +41,8 @@ export default function SohailYousafEduPage() {
         message: "",
     });
     const [files, setFiles] = useState<{ [key: string]: File | null }>({
-        cnic: null,
+        cnicFront: null,
+        cnicBack: null,
         signature: null,
         cheque: null,
         statement: null,
@@ -71,7 +72,8 @@ export default function SohailYousafEduPage() {
             formDataToSend.append('message', formData.message || "No message provided");
 
             // Append files
-            if (files.cnic) formDataToSend.append('cnic_document', files.cnic);
+            if (files.cnicFront) formDataToSend.append('cnic_front', files.cnicFront);
+            if (files.cnicBack) formDataToSend.append('cnic_back', files.cnicBack);
             if (files.signature) formDataToSend.append('signature_document', files.signature);
             if (files.cheque) formDataToSend.append('cheque_document', files.cheque);
             if (files.statement) formDataToSend.append('bank_statement', files.statement);
@@ -79,7 +81,7 @@ export default function SohailYousafEduPage() {
             await submitForm('Sohail Yousaf Edu', formDataToSend);
             setSubmitStatus("success");
             setFormData({ name: "", email: "", phone: "", motherName: "", accountType: "PSX Account", message: "" });
-            setFiles({ cnic: null, signature: null, cheque: null, statement: null });
+            setFiles({ cnicFront: null, cnicBack: null, signature: null, cheque: null, statement: null });
             // Reset file inputs manually if needed, or just let the success state handle it
             setTimeout(() => setSubmitStatus("idle"), 5000);
         } catch (error) {
@@ -426,17 +428,32 @@ export default function SohailYousafEduPage() {
 
                                 <div className="grid gap-6 sm:grid-cols-2 pt-4 border-t border-border/50">
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium">CNIC Front/Back Photo <span className="text-destructive">*</span></label>
+                                        <label className="text-sm font-medium">CNIC Front Photo <span className="text-destructive">*</span></label>
                                         <Input
                                             type="file"
-                                            name="cnic"
+                                            name="cnicFront"
                                             onChange={handleFileChange}
                                             required
                                             accept="image/*"
                                             className="bg-background"
                                         />
-                                        <p className="text-[10px] text-muted-foreground">Upload picture of CNIC front and back</p>
+                                        <p className="text-[10px] text-muted-foreground">Upload picture of CNIC front</p>
                                     </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-medium">CNIC Back Photo <span className="text-destructive">*</span></label>
+                                        <Input
+                                            type="file"
+                                            name="cnicBack"
+                                            onChange={handleFileChange}
+                                            required
+                                            accept="image/*"
+                                            className="bg-background"
+                                        />
+                                        <p className="text-[10px] text-muted-foreground">Upload picture of CNIC back</p>
+                                    </div>
+                                </div>
+
+                                <div className="grid gap-6 sm:grid-cols-2">
                                     <div className="space-y-2">
                                         <label className="text-sm font-medium">Signature on Plain Paper <span className="text-destructive">*</span></label>
                                         <Input
@@ -449,9 +466,6 @@ export default function SohailYousafEduPage() {
                                         />
                                         <p className="text-[10px] text-muted-foreground">Upload picture of your signature</p>
                                     </div>
-                                </div>
-
-                                <div className="grid gap-6 sm:grid-cols-2">
                                     <div className="space-y-2">
                                         <label className="text-sm font-medium">Chequebook Page Picture <span className="text-destructive">*</span></label>
                                         <Input
@@ -464,17 +478,17 @@ export default function SohailYousafEduPage() {
                                         />
                                         <p className="text-[10px] text-muted-foreground">Upload picture of a cheque from your bank</p>
                                     </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium">Bank Statement</label>
-                                        <Input
-                                            type="file"
-                                            name="statement"
-                                            onChange={handleFileChange}
-                                            accept=".pdf,image/*"
-                                            className="bg-background"
-                                        />
-                                        <p className="text-[10px] text-muted-foreground">Optional: Upload latest bank statement</p>
-                                    </div>
+                                </div>
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium">Bank Statement</label>
+                                    <Input
+                                        type="file"
+                                        name="statement"
+                                        onChange={handleFileChange}
+                                        accept=".pdf,image/*"
+                                        className="bg-background"
+                                    />
+                                    <p className="text-[10px] text-muted-foreground">Optional: Upload latest bank statement</p>
                                 </div>
 
                                 <div className="space-y-2">
@@ -513,10 +527,10 @@ export default function SohailYousafEduPage() {
                         </CardContent>
                     </Card>
                 </div>
-            </section>
+            </section >
 
             {/* Affiliations Ticker Section */}
-            <section className="py-12 bg-muted/20 border-t border-border/10 overflow-hidden">
+            < section className="py-12 bg-muted/20 border-t border-border/10 overflow-hidden" >
                 <style jsx global>{`
                     @keyframes scroll-ticker {
                         0% { transform: translateX(0); }
@@ -558,10 +572,10 @@ export default function SohailYousafEduPage() {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Floating WhatsApp Button */}
-            <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+            < div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2" >
                 <style jsx global>{`
                     @keyframes blink-shadow {
                         0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
@@ -589,7 +603,7 @@ export default function SohailYousafEduPage() {
                         </div>
                     </div>
                 </Link>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
