@@ -521,7 +521,7 @@ export default function SohailYousafEduPage() {
                     }
                 `}</style>
                 <div className="container px-4 md:px-6 mb-8 text-center">
-                    <h2 className="text-xl font-bold font-serif text-muted-foreground uppercase tracking-widest">Our Affiliations & Partners</h2>
+                    <h2 className="text-xl font-black font-serif text-foreground uppercase tracking-widest">Our Affiliations & Partners</h2>
                 </div>
 
                 <div className="relative flex overflow-hidden group">
