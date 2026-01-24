@@ -528,7 +528,7 @@ export default function SohailYousafEduPage() {
                     <div className="animate-ticker flex items-center gap-12 md:gap-24 px-12">
                         {/* Duplicate the array to create seamless loop */}
                         {[...AFFILIATIONS, ...AFFILIATIONS].map((item, index) => (
-                            <div key={index} className="flex-shrink-0 flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                            <div key={index} className="flex-shrink-0 flex items-center justify-center transition-all duration-500 hover:scale-110">
                                 {item.type === "image" ? (
                                     <div className="relative h-12 w-32 md:h-16 md:w-40">
                                         <Image
@@ -539,7 +539,7 @@ export default function SohailYousafEduPage() {
                                         />
                                     </div>
                                 ) : (
-                                    <span className="text-2xl md:text-3xl font-serif font-bold tracking-tighter text-foreground/40 uppercase">
+                                    <span className="text-2xl md:text-3xl font-serif font-bold tracking-tighter text-foreground uppercase">
                                         {item.name}
                                     </span>
                                 )}
