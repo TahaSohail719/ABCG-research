@@ -24,18 +24,13 @@ export async function submitForm(type: 'Contact Us' | 'Medisure' | 'Contact' | '
         } else if (value instanceof File && value.size > 0) {
             fileUploadPromises.push((async () => {
                 try {
-                    console.log(`Starting parallel upload for: ${key}, name: ${value.name}, size: ${value.size}`);
                     const blob = await put(`uploads/${Date.now()}-${value.name}`, value, {
                         access: 'public',
                         addRandomSuffix: true,
                     });
                     data[key] = blob.url;
-                    console.log(`Finished upload for: ${key}`);
                 } catch (err: any) {
-                    console.error(`Failed to upload file ${key}. Full Error:`, err);
-                    // Check if it's a token issue specifically
-                    const errorMessage = err.message || "Unknown error";
-                    throw new Error(`Failed to upload ${key} (${errorMessage}). Please try again.`);
+                    throw new Error(`Failed to upload ${key}. Please try again.`);
                 }
             })());
         }
@@ -94,42 +89,24 @@ export async function submitForm(type: 'Contact Us' | 'Medisure' | 'Contact' | '
     return { success: true };
 }
 
-// Hardcoded URL for debugging/fix
-const DIRECT_SUBMISSIONS_URL = "https://zgwftklqzehf5aam.public.blob.vercel-storage.com/submissions.json";
-
-export async function getSubmissions() {
+// 4. Helper to find and fetch the latest submissions file
+async function fetchLatestSubmissions(): Promise<Submission[]> {
     try {
-        console.log("Debug: Fetching manually from", DIRECT_SUBMISSIONS_URL);
-        const res = await fetch(DIRECT_SUBMISSIONS_URL, { cache: 'no-store' });
-
-        if (res.ok) {
-            const data = await res.json();
-            console.log("Debug: Successfully fetched via direct URL. Count:", data.length);
-            return data as Submission[];
-        } else {
-            console.error("Debug: Direct fetch failed with status:", res.status);
-        }
-
-        // Fallback to list() if direct fetch fails (though unlikely if ENOTFOUND is the issue)
-        /*
         const { blobs } = await list();
-        console.log("Debug: All blobs found:", blobs.map(b => b.pathname));
-        
         const jsonBlob = blobs.find((b) => b.pathname === SUBMISSIONS_JSON_PATH);
-        console.log("Debug: Found submissions blob:", jsonBlob?.url);
 
         if (jsonBlob) {
             const res = await fetch(jsonBlob.url, { cache: 'no-store' });
             if (res.ok) {
-                const data = await res.json();
-                console.log("Debug: Fetched submissions count:", data.length);
-                return data as Submission[];
+                return await res.json();
             }
         }
-        */
-        return [];
     } catch (err) {
-        console.error("Failed to fetch submissions", err);
-        return [];
+        console.error("Failed to fetch submissions file from blob:", err);
     }
+    return [];
+}
+
+export async function getSubmissions() {
+    return await fetchLatestSubmissions();
 }
