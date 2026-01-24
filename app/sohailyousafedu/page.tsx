@@ -6,9 +6,10 @@ import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { submitForm } from "@/actions/submit-form";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 
 const AFFILIATIONS = [
     { name: "Odoo", src: "/odoo-logo.png", type: "image" },
@@ -21,6 +22,16 @@ const AFFILIATIONS = [
 ];
 
 export default function SohailYousafEduPage() {
+    const { theme, setTheme } = useTheme();
+
+    useEffect(() => {
+        const savedTheme = theme;
+        setTheme("dark");
+        return () => {
+            if (savedTheme) setTheme(savedTheme);
+        };
+    }, []);
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",

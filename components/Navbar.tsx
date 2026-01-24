@@ -25,6 +25,7 @@ export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
     const isMedisure = pathname === "/medisure";
+    const isEduPage = pathname === "/sohailyousafedu";
     const logoSrc = isMedisure ? "/medisure-logo.png" : "/logo-header.png";
     const logoAlt = isMedisure ? "MediSure" : "ABCG Research Logo";
 
@@ -83,12 +84,14 @@ export function Navbar() {
                         </NavigationMenuList>
                     </NavigationMenu>
                 </div>
-                <div className="hidden md:flex items-center gap-4">
-                    <ModeToggle />
-                    <Link href="/contact">
-                        <Button>Contact Us</Button>
-                    </Link>
-                </div>
+                {!isEduPage && (
+                    <div className="hidden md:flex items-center gap-4">
+                        <ModeToggle />
+                        <Link href="/contact">
+                            <Button>Contact Us</Button>
+                        </Link>
+                    </div>
+                )}
 
                 {/* Mobile Menu */}
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -148,17 +151,19 @@ export function Navbar() {
                             </nav>
 
                             {/* Mobile Footer Area */}
-                            <div className="p-6 border-t border-border/10 bg-muted/5 space-y-6">
-                                <Link href="/contact" onClick={() => setIsOpen(false)}>
-                                    <Button className="w-full text-base font-semibold py-6 shadow-lg shadow-primary/20" size="lg">
-                                        Contact Us
-                                    </Button>
-                                </Link>
-                                <div className="flex items-center justify-between px-2">
-                                    <span className="text-sm font-medium text-muted-foreground">Theme</span>
-                                    <ModeToggle />
+                            {!isEduPage && (
+                                <div className="p-6 border-t border-border/10 bg-muted/5 space-y-6">
+                                    <Link href="/contact" onClick={() => setIsOpen(false)}>
+                                        <Button className="w-full text-base font-semibold py-6 shadow-lg shadow-primary/20" size="lg">
+                                            Contact Us
+                                        </Button>
+                                    </Link>
+                                    <div className="flex items-center justify-between px-2">
+                                        <span className="text-sm font-medium text-muted-foreground">Theme</span>
+                                        <ModeToggle />
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     </SheetContent>
                 </Sheet>
