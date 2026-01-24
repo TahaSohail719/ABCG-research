@@ -80,8 +80,9 @@ export async function submitForm(type: 'Contact Us' | 'Medisure' | 'Contact' | '
         throw error;
     }
 
-    // Revalidate admin page to show new submission immediately if open
+    // Revalidate admin pages to show new submission immediately
     revalidatePath("/admin");
+    revalidatePath("/sohailyousafedu/admin");
     return { success: true };
 }
 

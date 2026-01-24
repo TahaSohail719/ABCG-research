@@ -41,14 +41,15 @@ export default function SohailYousafEduPage() {
         message: "",
     });
     const [files, setFiles] = useState<{ [key: string]: File | null }>({
-        cnicFront: null,
-        cnicBack: null,
+        cnic_front: null,
+        cnic_back: null,
         signature: null,
         cheque: null,
         statement: null,
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const [sessionFormData, setSessionFormData] = useState({
         name: "",
@@ -72,8 +73,8 @@ export default function SohailYousafEduPage() {
             formDataToSend.append('message', formData.message || "No message provided");
 
             // Append files
-            if (files.cnicFront) formDataToSend.append('cnic_front', files.cnicFront);
-            if (files.cnicBack) formDataToSend.append('cnic_back', files.cnicBack);
+            if (files.cnic_front) formDataToSend.append('cnic_front', files.cnic_front);
+            if (files.cnic_back) formDataToSend.append('cnic_back', files.cnic_back);
             if (files.signature) formDataToSend.append('signature_document', files.signature);
             if (files.cheque) formDataToSend.append('cheque_document', files.cheque);
             if (files.statement) formDataToSend.append('bank_statement', files.statement);
@@ -81,11 +82,12 @@ export default function SohailYousafEduPage() {
             await submitForm('Sohail Yousaf Edu', formDataToSend);
             setSubmitStatus("success");
             setFormData({ name: "", email: "", phone: "", motherName: "", accountType: "PSX Account", message: "" });
-            setFiles({ cnicFront: null, cnicBack: null, signature: null, cheque: null, statement: null });
+            setFiles({ cnic_front: null, cnic_back: null, signature: null, cheque: null, statement: null });
             // Reset file inputs manually if needed, or just let the success state handle it
             setTimeout(() => setSubmitStatus("idle"), 5000);
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
+            setErrorMessage(error.message || "Failed to submit. Please check file sizes and try again.");
             setSubmitStatus("error");
         } finally {
             setIsSubmitting(false);
@@ -130,14 +132,12 @@ export default function SohailYousafEduPage() {
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            const fileName = e.target.name;
-            const file = e.target.files[0];
-            setFiles(prev => ({
-                ...prev,
-                [fileName]: file
-            }));
-        }
+        const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
+        const fileName = e.target.name;
+        setFiles(prev => ({
+            ...prev,
+            [fileName]: file
+        }));
     };
 
     return (
@@ -428,10 +428,11 @@ export default function SohailYousafEduPage() {
 
                                 <div className="grid gap-6 sm:grid-cols-2 pt-4 border-t border-border/50">
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium">CNIC Front Photo <span className="text-destructive">*</span></label>
+                                        <label htmlFor="cnic_front" className="text-sm font-medium">CNIC Front Photo <span className="text-destructive">*</span></label>
                                         <Input
+                                            id="cnic_front"
                                             type="file"
-                                            name="cnicFront"
+                                            name="cnic_front"
                                             onChange={handleFileChange}
                                             required
                                             accept="image/*"
@@ -440,10 +441,11 @@ export default function SohailYousafEduPage() {
                                         <p className="text-[10px] text-muted-foreground">Upload picture of CNIC front</p>
                                     </div>
                                     <div className="space-y-2">
-                                        <label className="text-sm font-medium">CNIC Back Photo <span className="text-destructive">*</span></label>
+                                        <label htmlFor="cnic_back" className="text-sm font-medium">CNIC Back Photo <span className="text-destructive">*</span></label>
                                         <Input
+                                            id="cnic_back"
                                             type="file"
-                                            name="cnicBack"
+                                            name="cnic_back"
                                             onChange={handleFileChange}
                                             required
                                             accept="image/*"
@@ -511,7 +513,7 @@ export default function SohailYousafEduPage() {
 
                                 {submitStatus === "error" && (
                                     <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-md text-sm">
-                                        Something went wrong during upload. Please ensure files are not too large and try again.
+                                        {errorMessage || "Something went wrong during upload. Please ensure files are not too large and try again."}
                                     </div>
                                 )}
 
