@@ -19,6 +19,14 @@ export default function SohailYousafEduPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
+    const [sessionFormData, setSessionFormData] = useState({
+        name: "",
+        email: "",
+        phone: "",
+    });
+    const [isSessionSubmitting, setIsSessionSubmitting] = useState(false);
+    const [sessionSubmitStatus, setSessionSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
@@ -40,6 +48,36 @@ export default function SohailYousafEduPage() {
         } finally {
             setIsSubmitting(false);
         }
+    };
+
+    const handleSessionSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSessionSubmitting(true);
+        try {
+            const formDataToSend = new FormData();
+            formDataToSend.append('name', sessionFormData.name);
+            formDataToSend.append('email', sessionFormData.email);
+            formDataToSend.append('phone', sessionFormData.phone);
+            formDataToSend.append('subject', "Live Session Registration");
+            formDataToSend.append('message', "Registration for Weekly Live Analysis Session");
+
+            await submitForm('Sohail Yousaf Edu', formDataToSend);
+            setSessionSubmitStatus("success");
+            setSessionFormData({ name: "", email: "", phone: "" });
+            setTimeout(() => setSessionSubmitStatus("idle"), 5000);
+        } catch (error) {
+            console.error(error);
+            setSessionSubmitStatus("error");
+        } finally {
+            setIsSessionSubmitting(false);
+        }
+    };
+
+    const handleSessionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSessionFormData(prev => ({
+            ...prev,
+            [e.target.name]: e.target.value
+        }));
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -189,9 +227,53 @@ export default function SohailYousafEduPage() {
                                     <span><strong>Direct Interaction</strong> - Ask questions and get real-time guidance on where to start.</span>
                                 </li>
                             </ul>
-                            <Button size="lg" className="mt-4" disabled>
-                                <MonitorPlay className="mr-2 h-4 w-4" /> Join Link (Coming Soon)
-                            </Button>
+                            <form onSubmit={handleSessionSubmit} className="mt-6 space-y-4 max-w-md">
+                                <div className="space-y-2">
+                                    <Input
+                                        name="name"
+                                        value={sessionFormData.name}
+                                        onChange={handleSessionChange}
+                                        placeholder="Full Name"
+                                        required
+                                        className="bg-background/50"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <Input
+                                        name="email"
+                                        type="email"
+                                        value={sessionFormData.email}
+                                        onChange={handleSessionChange}
+                                        placeholder="Email Address"
+                                        required
+                                        className="bg-background/50"
+                                    />
+                                    <Input
+                                        name="phone"
+                                        value={sessionFormData.phone}
+                                        onChange={handleSessionChange}
+                                        placeholder="Phone Number"
+                                        required
+                                        className="bg-background/50"
+                                    />
+                                </div>
+
+                                {sessionSubmitStatus === "success" && (
+                                    <p className="text-sm text-green-500 font-medium">Successfully registered for the session!</p>
+                                )}
+                                {sessionSubmitStatus === "error" && (
+                                    <p className="text-sm text-destructive font-medium">Failed to register. Please try again.</p>
+                                )}
+
+                                <Button
+                                    type="submit"
+                                    size="lg"
+                                    className="w-full bg-[#f26726] hover:bg-[#d9561d] text-white font-bold"
+                                    disabled={isSessionSubmitting}
+                                >
+                                    {isSessionSubmitting ? "Submitting..." : "Register for Session"}
+                                </Button>
+                            </form>
                         </div>
                         <div className="lg:w-1/2 relative">
                             {/* Promo image for Live Session */}
