@@ -43,6 +43,24 @@ export default function EduAdminPage() {
         }
     };
 
+    const downloadFile = async (url: string, filename: string) => {
+        try {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(blobUrl);
+        } catch (error) {
+            console.error("Download failed:", error);
+            window.open(url, '_blank'); // Fallback to opening in new tab
+        }
+    };
+
     const liveSessions = submissions.filter(s => s.data.subject === "Live Session Registration");
     const accountOpenings = submissions.filter(s => s.data.subject === "Sohail Yousaf Edu Account Opening");
 
@@ -204,21 +222,14 @@ export default function EduAdminPage() {
                                                                 >
                                                                     <Eye className="h-3 w-3 mr-1" /> View
                                                                 </Button>
-                                                                <a
-                                                                    href={sub.data[doc.key]}
-                                                                    download
-                                                                    target="_blank"
-                                                                    rel="noopener noreferrer"
-                                                                    className="flex-1"
+                                                                <Button
+                                                                    variant="outline"
+                                                                    size="sm"
+                                                                    className="flex-1 border-white/10 hover:bg-white/5 text-xs text-white"
+                                                                    onClick={() => downloadFile(sub.data[doc.key], `${sub.data.name.replace(/\s+/g, '_')}_${doc.label.replace(/\s+/g, '_')}`)}
                                                                 >
-                                                                    <Button
-                                                                        variant="outline"
-                                                                        size="sm"
-                                                                        className="w-full border-white/10 hover:bg-white/5 text-xs text-white"
-                                                                    >
-                                                                        <Download className="h-3 w-3 mr-1" /> Save
-                                                                    </Button>
-                                                                </a>
+                                                                    <Download className="h-3 w-3 mr-1" /> Save
+                                                                </Button>
                                                             </div>
                                                         </div>
                                                     ))}

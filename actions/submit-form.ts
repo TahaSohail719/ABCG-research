@@ -31,9 +31,11 @@ export async function submitForm(type: 'Contact Us' | 'Medisure' | 'Contact' | '
                     });
                     data[key] = blob.url;
                     console.log(`Finished upload for: ${key}`);
-                } catch (err) {
-                    console.error(`Failed to upload file ${key}:`, err);
-                    throw new Error(`Failed to upload ${key}. Please try again.`);
+                } catch (err: any) {
+                    console.error(`Failed to upload file ${key}. Full Error:`, err);
+                    // Check if it's a token issue specifically
+                    const errorMessage = err.message || "Unknown error";
+                    throw new Error(`Failed to upload ${key} (${errorMessage}). Please try again.`);
                 }
             })());
         }
