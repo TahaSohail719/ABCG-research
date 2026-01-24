@@ -194,14 +194,13 @@ export default function SohailYousafEduPage() {
                             </Button>
                         </div>
                         <div className="lg:w-1/2 relative">
-                            {/* Placeholder for a video thumbnail or image of Sohail Yousaf */}
-                            <div className="aspect-video rounded-xl bg-muted border border-border/50 shadow-2xl flex items-center justify-center relative overflow-hidden group">
-                                <div className="absolute inset-0 bg-gradient-to-br from-black/20 to-black/60" />
-                                <MonitorPlay className="w-16 h-16 text-white/80 group-hover:scale-110 transition-transform duration-300" />
-                                <div className="absolute bottom-4 left-4 right-4 text-white">
-                                    <p className="font-bold text-lg">Market Outlook & Q&A</p>
-                                    <p className="text-sm opacity-80">Friday's @ 9PM PKT</p>
-                                </div>
+                            {/* Promo image for Live Session */}
+                            <div className="aspect-video rounded-xl bg-muted border border-border/50 shadow-2xl overflow-hidden group">
+                                <img
+                                    src="/live-session-promo.png"
+                                    alt="Live Session with Sohail Yousaf - Every Friday at 9:00 PM"
+                                    className="w-full h-full object-contain md:object-cover group-hover:scale-105 transition-transform duration-500"
+                                />
                             </div>
                         </div>
                     </div>
