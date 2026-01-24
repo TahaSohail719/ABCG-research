@@ -157,9 +157,9 @@ export default function SohailYousafEduPage() {
             </section>
 
             {/* Account Opening Section - Revamped */}
-            <section className="py-20 bg-muted/30">
+            <section className="py-10 bg-muted/30">
                 <div className="container px-4 md:px-6">
-                    <div className="flex flex-col items-center text-center space-y-4 mb-16">
+                    <div className="flex flex-col items-center text-center space-y-4 mb-8">
                         <h2 className="text-3xl font-bold font-serif tracking-tight">Trade with Confidence</h2>
                         <p className="text-muted-foreground max-w-2xl">
                             Unlock the potential of PSX and PMX with our expert guidance.
@@ -227,7 +227,7 @@ export default function SohailYousafEduPage() {
             </section>
 
             {/* Live Session Section */}
-            <section className="py-20 border-t border-border/50 relative overflow-hidden">
+            <section className="py-10 border-t border-border/50 relative overflow-hidden">
                 <div className="absolute inset-0 bg-primary/5 -z-10" />
                 <div className="container px-4 md:px-6">
                     <div className="flex flex-col lg:flex-row items-center gap-12">
@@ -319,9 +319,9 @@ export default function SohailYousafEduPage() {
             </section>
 
             {/* Contact Section */}
-            <section className="py-24 bg-background">
+            <section className="py-12 bg-background">
                 <div className="container px-4 md:px-6 max-w-4xl">
-                    <div className="text-center mb-12">
+                    <div className="text-center mb-6">
                         <h2 className="text-3xl font-bold font-serif mb-4">Start Your Journey</h2>
                         <p className="text-muted-foreground">
                             Ready to open an account or need more details? Submit your information and we will guide you through the process.
