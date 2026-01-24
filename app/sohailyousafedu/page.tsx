@@ -8,6 +8,17 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
 import { submitForm } from "@/actions/submit-form";
+import Image from "next/image";
+
+const AFFILIATIONS = [
+    { name: "Odoo", src: "/odoo-logo.png", type: "image" },
+    { name: "IRF", src: "/independent-research-forum-logo.png", type: "image" },
+    { name: "Optiquant", type: "text" },
+    { name: "Value Stock & Commodities", src: "/affiliations/logo-value-stock.jpg", type: "image" },
+    { name: "OS Capital", src: "/affiliations/logo-os-capital.jpg", type: "image" },
+    { name: "PSX", src: "/affiliations/logo-psx.jpg", type: "image" },
+    { name: "PMEX", src: "/affiliations/logo-pmex.png", type: "image" },
+];
 
 export default function SohailYousafEduPage() {
     const [formData, setFormData] = useState({
@@ -490,6 +501,51 @@ export default function SohailYousafEduPage() {
                             </form>
                         </CardContent>
                     </Card>
+                </div>
+            </section>
+
+            {/* Affiliations Ticker Section */}
+            <section className="py-12 bg-muted/20 border-t border-border/10 overflow-hidden">
+                <style jsx global>{`
+                    @keyframes scroll-ticker {
+                        0% { transform: translateX(0); }
+                        100% { transform: translateX(-50%); }
+                    }
+                    .animate-ticker {
+                        display: flex;
+                        width: max-content;
+                        animation: scroll-ticker 30s linear infinite;
+                    }
+                    .animate-ticker:hover {
+                        animation-play-state: paused;
+                    }
+                `}</style>
+                <div className="container px-4 md:px-6 mb-8 text-center">
+                    <h2 className="text-xl font-bold font-serif text-muted-foreground uppercase tracking-widest">Our Affiliations & Partners</h2>
+                </div>
+
+                <div className="relative flex overflow-hidden group">
+                    <div className="animate-ticker flex items-center gap-12 md:gap-24 px-12">
+                        {/* Duplicate the array to create seamless loop */}
+                        {[...AFFILIATIONS, ...AFFILIATIONS].map((item, index) => (
+                            <div key={index} className="flex-shrink-0 flex items-center justify-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+                                {item.type === "image" ? (
+                                    <div className="relative h-12 w-32 md:h-16 md:w-40">
+                                        <Image
+                                            src={item.src!}
+                                            alt={item.name}
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                ) : (
+                                    <span className="text-2xl md:text-3xl font-serif font-bold tracking-tighter text-foreground/40 uppercase">
+                                        {item.name}
+                                    </span>
+                                )}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </section>
 
