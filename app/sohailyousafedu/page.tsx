@@ -79,12 +79,16 @@ export default function SohailYousafEduPage() {
             if (files.cheque) formDataToSend.append('cheque_document', files.cheque);
             if (files.statement) formDataToSend.append('bank_statement', files.statement);
 
-            await submitForm('Sohail Yousaf Edu', formDataToSend);
-            setSubmitStatus("success");
-            setFormData({ name: "", email: "", phone: "", motherName: "", accountType: "PSX Account", message: "" });
-            setFiles({ cnic_front: null, cnic_back: null, signature: null, cheque: null, statement: null });
-            // Reset file inputs manually if needed, or just let the success state handle it
-            setTimeout(() => setSubmitStatus("idle"), 5000);
+            const result = await submitForm('Sohail Yousaf Edu', formDataToSend);
+
+            if (result && result.success) {
+                setSubmitStatus("success");
+                setFormData({ name: "", email: "", phone: "", motherName: "", accountType: "PSX Account", message: "" });
+                setFiles({ cnic_front: null, cnic_back: null, signature: null, cheque: null, statement: null });
+                setTimeout(() => setSubmitStatus("idle"), 5000);
+            } else {
+                throw new Error("Server returned an unsuccessful response.");
+            }
         } catch (error: any) {
             console.error(error);
             setErrorMessage(error.message || "Failed to submit. Please check file sizes and try again.");
@@ -133,6 +137,13 @@ export default function SohailYousafEduPage() {
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
+
+        if (file && file.size > 5 * 1024 * 1024) { // 5MB limit
+            alert("File size exceeds 5MB. Please upload a smaller image.");
+            e.target.value = ""; // Clear input
+            return;
+        }
+
         const fileName = e.target.name;
         setFiles(prev => ({
             ...prev,
