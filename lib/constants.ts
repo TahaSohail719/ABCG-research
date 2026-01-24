@@ -18,7 +18,6 @@ export const NAV_LINKS = [
         items: [
             { title: "ABCG.io", href: "https://abcg.io" },
             { title: "Medisure", href: "/medisure" },
-            { title: "Sohail Yousaf Edu", href: "/sohailyousafedu" },
         ],
     },
 ];
