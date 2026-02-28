@@ -237,7 +237,7 @@ export default function ContactPage() {
                                         <div>
                                             <CardTitle className="font-serif">London, United Kingdom</CardTitle>
                                             <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                                                {FOOTER_INFO.locations[1]}
+                                                {FOOTER_INFO.locations[2]}
                                             </p>
                                         </div>
                                     </div>
@@ -253,7 +253,7 @@ export default function ContactPage() {
                                         <div>
                                             <CardTitle className="font-serif">Trois-Rivières, France</CardTitle>
                                             <p className="text-sm text-muted-foreground mt-2 leading-relaxed">
-                                                {FOOTER_INFO.locations[2]}
+                                                {FOOTER_INFO.locations[3]}
                                             </p>
                                         </div>
                                     </div>

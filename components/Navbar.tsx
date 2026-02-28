@@ -26,6 +26,7 @@ export function Navbar() {
     const pathname = usePathname();
     const isMedisure = pathname === "/medisure";
     const isEduPage = pathname === "/sohailyousafedu";
+    const isRegistrationPage = pathname.startsWith("/registration");
     const logoSrc = isMedisure ? "/medisure-logo.png" : "/logo-header.png";
     const logoAlt = isMedisure ? "MediSure" : "ABCG Research Logo";
 
@@ -43,52 +44,63 @@ export function Navbar() {
                     />
                 </Link>
                 <div className="hidden md:flex md:flex-1">
-                    <NavigationMenu viewport={false}>
-                        <NavigationMenuList>
-                            {NAV_LINKS.map((link) => (
-                                <NavigationMenuItem key={link.title}>
-                                    {link.items ? (
-                                        <>
-                                            <NavigationMenuTrigger className="bg-transparent">
-                                                {link.title}
-                                            </NavigationMenuTrigger>
-                                            <NavigationMenuContent>
-                                                <ul className="flex items-center justify-center p-4 min-w-[300px] gap-6 bg-background/95 backdrop-blur-md border border-border/50 shadow-2xl rounded-2xl">
-                                                    {link.items.map((item) => (
-                                                        <li key={item.title}>
-                                                            <NavigationMenuLink asChild>
-                                                                <Link
-                                                                    href={item.href}
-                                                                    className="group relative flex flex-col items-center px-6 py-3 rounded-xl transition-all hover:bg-primary/5"
-                                                                >
-                                                                    <div className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
-                                                                        {item.title}
-                                                                    </div>
-                                                                    <div className="absolute bottom-1 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-1/2" />
-                                                                </Link>
-                                                            </NavigationMenuLink>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </NavigationMenuContent>
-                                        </>
-                                    ) : (
-                                        <NavigationMenuLink asChild>
-                                            <Link href={link.href} className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
-                                                {link.title}
-                                            </Link>
-                                        </NavigationMenuLink>
-                                    )}
-                                </NavigationMenuItem>
-                            ))}
-                        </NavigationMenuList>
-                    </NavigationMenu>
+                    {!isRegistrationPage ? (
+                        <NavigationMenu viewport={false}>
+                            <NavigationMenuList>
+                                {NAV_LINKS.map((link) => (
+                                    <NavigationMenuItem key={link.title}>
+                                        {link.items ? (
+                                            <>
+                                                <NavigationMenuTrigger className="bg-transparent">
+                                                    {link.title}
+                                                </NavigationMenuTrigger>
+                                                <NavigationMenuContent>
+                                                    <ul className="flex items-center justify-center p-4 min-w-[300px] gap-6 bg-background/95 backdrop-blur-md border border-border/50 shadow-2xl rounded-2xl">
+                                                        {link.items.map((item) => (
+                                                            <li key={item.title}>
+                                                                <NavigationMenuLink asChild>
+                                                                    <Link
+                                                                        href={item.href}
+                                                                        className="group relative flex flex-col items-center px-6 py-3 rounded-xl transition-all hover:bg-primary/5"
+                                                                    >
+                                                                        <div className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                                                                            {item.title}
+                                                                        </div>
+                                                                        <div className="absolute bottom-1 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-1/2" />
+                                                                    </Link>
+                                                                </NavigationMenuLink>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </NavigationMenuContent>
+                                            </>
+                                        ) : (
+                                            <NavigationMenuLink asChild>
+                                                <Link href={link.href} className={cn(navigationMenuTriggerStyle(), "bg-transparent")}>
+                                                    {link.title}
+                                                </Link>
+                                            </NavigationMenuLink>
+                                        )}
+                                    </NavigationMenuItem>
+                                ))}
+                            </NavigationMenuList>
+                        </NavigationMenu>
+                    ) : null}
                 </div>
-                {!isEduPage && (
+                {!isEduPage && !isRegistrationPage && (
                     <div className="hidden md:flex items-center gap-4">
                         <ModeToggle />
                         <Link href="/contact">
                             <Button>Contact Us</Button>
+                        </Link>
+                    </div>
+                )}
+                {isRegistrationPage && (
+                    <div className="hidden md:flex items-center gap-4">
+                        <Link href="/sohailyousafedu">
+                            <Button className="bg-orange-600 hover:bg-orange-500 text-white border-orange-500/20 shadow-lg shadow-orange-500/20">
+                                Sohail Yousaf Edu
+                            </Button>
                         </Link>
                     </div>
                 )}
@@ -119,7 +131,7 @@ export function Navbar() {
 
                             {/* Navigation Links */}
                             <nav className="flex-1 overflow-y-auto py-6 px-6 flex flex-col gap-6">
-                                {NAV_LINKS.map((link) => (
+                                {!isRegistrationPage && NAV_LINKS.map((link) => (
                                     <div key={link.title} className="flex flex-col gap-3">
                                         {link.items ? (
                                             <>
@@ -151,7 +163,7 @@ export function Navbar() {
                             </nav>
 
                             {/* Mobile Footer Area */}
-                            {!isEduPage && (
+                            {!isEduPage && !isRegistrationPage && (
                                 <div className="p-6 border-t border-border/10 bg-muted/5 space-y-6">
                                     <Link href="/contact" onClick={() => setIsOpen(false)}>
                                         <Button className="w-full text-base font-semibold py-6 shadow-lg shadow-primary/20" size="lg">
@@ -162,6 +174,15 @@ export function Navbar() {
                                         <span className="text-sm font-medium text-muted-foreground">Theme</span>
                                         <ModeToggle />
                                     </div>
+                                </div>
+                            )}
+                            {isRegistrationPage && (
+                                <div className="p-6 border-t border-border/10 bg-muted/5 space-y-6">
+                                    <Link href="/sohailyousafedu" onClick={() => setIsOpen(false)}>
+                                        <Button className="w-full text-base font-semibold py-6 shadow-lg shadow-orange-500/20 bg-orange-600 hover:bg-orange-500 text-white border-orange-500/20" size="lg">
+                                            Sohail Yousaf Edu
+                                        </Button>
+                                    </Link>
                                 </div>
                             )}
                         </div>

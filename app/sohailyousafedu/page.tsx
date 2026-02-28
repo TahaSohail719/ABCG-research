@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight, CheckCircle2, Clock, ShieldCheck, TrendingUp, MonitorPlay, UserCheck, Instagram, Facebook, Youtube, MessageCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, ShieldCheck, TrendingUp, MonitorPlay, UserCheck, Instagram, Facebook, Youtube, MessageCircle, GraduationCap } from "lucide-react";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -32,25 +32,6 @@ export default function SohailYousafEduPage() {
         };
     }, []);
 
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        motherName: "",
-        accountType: "PSX Account",
-        message: "",
-    });
-    const [files, setFiles] = useState<{ [key: string]: File | null }>({
-        cnic_front: null,
-        cnic_back: null,
-        signature: null,
-        cheque: null,
-        statement: null,
-    });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
-    const [errorMessage, setErrorMessage] = useState("");
-
     const [sessionFormData, setSessionFormData] = useState({
         name: "",
         email: "",
@@ -59,44 +40,6 @@ export default function SohailYousafEduPage() {
     const [isSessionSubmitting, setIsSessionSubmitting] = useState(false);
     const [sessionSubmitStatus, setSessionSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        try {
-            const formDataToSend = new FormData();
-            formDataToSend.append('name', formData.name);
-            formDataToSend.append('email', formData.email);
-            formDataToSend.append('phone', formData.phone);
-            formDataToSend.append('motherName', formData.motherName);
-            formDataToSend.append('accountType', formData.accountType);
-            formDataToSend.append('subject', "Sohail Yousaf Edu Account Opening");
-            formDataToSend.append('message', formData.message || "No message provided");
-
-            // Append files
-            if (files.cnic_front) formDataToSend.append('cnic_front', files.cnic_front);
-            if (files.cnic_back) formDataToSend.append('cnic_back', files.cnic_back);
-            if (files.signature) formDataToSend.append('signature_document', files.signature);
-            if (files.cheque) formDataToSend.append('cheque_document', files.cheque);
-            if (files.statement) formDataToSend.append('bank_statement', files.statement);
-
-            const result = await submitForm('Sohail Yousaf Edu', formDataToSend);
-
-            if (result && result.success) {
-                setSubmitStatus("success");
-                setFormData({ name: "", email: "", phone: "", motherName: "", accountType: "PSX Account", message: "" });
-                setFiles({ cnic_front: null, cnic_back: null, signature: null, cheque: null, statement: null });
-                setTimeout(() => setSubmitStatus("idle"), 5000);
-            } else {
-                throw new Error("Server returned an unsuccessful response.");
-            }
-        } catch (error: any) {
-            console.error(error);
-            setErrorMessage(error.message || "Failed to submit. Please check file sizes and try again.");
-            setSubmitStatus("error");
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
 
     const handleSessionSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -125,29 +68,6 @@ export default function SohailYousafEduPage() {
         setSessionFormData(prev => ({
             ...prev,
             [e.target.name]: e.target.value
-        }));
-    };
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData(prev => ({
-            ...prev,
-            [e.target.name]: e.target.value
-        }));
-    };
-
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
-
-        if (file && file.size > 5 * 1024 * 1024) { // 5MB limit
-            alert("File size exceeds 5MB. Please upload a smaller image.");
-            e.target.value = ""; // Clear input
-            return;
-        }
-
-        const fileName = e.target.name;
-        setFiles(prev => ({
-            ...prev,
-            [fileName]: file
         }));
     };
 
@@ -353,194 +273,79 @@ export default function SohailYousafEduPage() {
                 </div>
             </section>
 
-            {/* Contact Section */}
-            <section className="py-12 bg-background">
-                <div className="container px-4 md:px-6 max-w-4xl">
-                    <div className="text-center mb-6">
-                        <h2 className="text-3xl font-bold font-serif mb-4">Start Your Journey</h2>
-                        <p className="text-muted-foreground">
-                            Ready to open an account or need more details? Submit your information and we will guide you through the process.
+            {/* Start Your Trading Journey Banner Section */}
+            <section className="relative py-12 md:py-16 bg-slate-950 border-t border-border/10 text-white overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-900/40 via-slate-950 to-slate-950 z-10" />
+                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-orange-500/20 rounded-full blur-[100px] opacity-50 mix-blend-screen" />
+                </div>
+                <div className="container relative z-10 px-4 md:px-6 flex flex-col lg:flex-row items-center justify-between gap-8 max-w-6xl mx-auto">
+                    <div className="flex-1 text-center lg:text-left">
+                        <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-500 text-sm font-medium mb-4 backdrop-blur-sm">
+                            Start Trading Today
+                        </div>
+                        <h2 className="text-3xl md:text-4xl font-bold font-serif mb-4 leading-tight">
+                            Take Control of Your Financial Future
+                        </h2>
+                        <p className="text-lg text-slate-300 max-w-2xl leading-relaxed mx-auto lg:mx-0">
+                            Join Sohail Yousaf's network of traders. Experience fast activation, zero-hassle compliance, and top-tier broker partnerships.
                         </p>
                     </div>
 
-                    <Card className="border-border/50 shadow-xl bg-muted/10">
-                        <CardContent className="p-8">
-                            <form onSubmit={handleSubmit} className="space-y-6">
-                                <div className="grid gap-6 sm:grid-cols-2">
-                                    <div className="space-y-2">
-                                        <label htmlFor="name" className="text-sm font-medium">Full Name <span className="text-destructive">*</span></label>
-                                        <Input
-                                            id="name"
-                                            name="name"
-                                            value={formData.name}
-                                            onChange={handleChange}
-                                            placeholder="Full Name"
-                                            required
-                                            className="bg-background"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label htmlFor="phone" className="text-sm font-medium">Phone Number (Registered on CNIC) <span className="text-destructive">*</span></label>
-                                        <Input
-                                            id="phone"
-                                            name="phone"
-                                            value={formData.phone}
-                                            onChange={handleChange}
-                                            placeholder="+92 300 1234567"
-                                            required
-                                            className="bg-background"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="grid gap-6 sm:grid-cols-2">
-                                    <div className="space-y-2">
-                                        <label htmlFor="email" className="text-sm font-medium">Email Address <span className="text-destructive">*</span></label>
-                                        <Input
-                                            id="email"
-                                            name="email"
-                                            type="email"
-                                            value={formData.email}
-                                            onChange={handleChange}
-                                            placeholder="email@example.com"
-                                            required
-                                            className="bg-background"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label htmlFor="motherName" className="text-sm font-medium">Mother&apos;s Name <span className="text-destructive">*</span></label>
-                                        <Input
-                                            id="motherName"
-                                            name="motherName"
-                                            value={formData.motherName}
-                                            onChange={handleChange}
-                                            placeholder="Mother's Name"
-                                            required
-                                            className="bg-background"
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label htmlFor="accountType" className="text-sm font-medium border-none">Account Type <span className="text-destructive">*</span></label>
-                                    <select
-                                        id="accountType"
-                                        name="accountType"
-                                        value={formData.accountType}
-                                        onChange={handleChange}
-                                        required
-                                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                                    >
-                                        <option value="PSX Account">PSX Account</option>
-                                        <option value="PMEX Account">PMEX Account</option>
-                                        <option value="Both">Both (PSX & PMEX)</option>
-                                    </select>
-                                </div>
-
-                                <div className="grid gap-6 sm:grid-cols-2 pt-4 border-t border-border/50">
-                                    <div className="space-y-2">
-                                        <label htmlFor="cnic_front" className="text-sm font-medium">CNIC Front Photo <span className="text-destructive">*</span></label>
-                                        <Input
-                                            id="cnic_front"
-                                            type="file"
-                                            name="cnic_front"
-                                            onChange={handleFileChange}
-                                            required
-                                            accept="image/*"
-                                            className="bg-background"
-                                        />
-                                        <p className="text-[10px] text-muted-foreground">Upload picture of CNIC front</p>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label htmlFor="cnic_back" className="text-sm font-medium">CNIC Back Photo <span className="text-destructive">*</span></label>
-                                        <Input
-                                            id="cnic_back"
-                                            type="file"
-                                            name="cnic_back"
-                                            onChange={handleFileChange}
-                                            required
-                                            accept="image/*"
-                                            className="bg-background"
-                                        />
-                                        <p className="text-[10px] text-muted-foreground">Upload picture of CNIC back</p>
-                                    </div>
-                                </div>
-
-                                <div className="grid gap-6 sm:grid-cols-2">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium">Signature on Plain Paper <span className="text-destructive">*</span></label>
-                                        <Input
-                                            type="file"
-                                            name="signature"
-                                            onChange={handleFileChange}
-                                            required
-                                            accept="image/*"
-                                            className="bg-background"
-                                        />
-                                        <p className="text-[10px] text-muted-foreground">Upload picture of your signature</p>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium">Chequebook Page Picture <span className="text-destructive">*</span></label>
-                                        <Input
-                                            type="file"
-                                            name="cheque"
-                                            onChange={handleFileChange}
-                                            required
-                                            accept="image/*"
-                                            className="bg-background"
-                                        />
-                                        <p className="text-[10px] text-muted-foreground">Upload picture of a cheque from your bank</p>
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">Bank Statement</label>
-                                    <Input
-                                        type="file"
-                                        name="statement"
-                                        onChange={handleFileChange}
-                                        accept=".pdf,image/*"
-                                        className="bg-background"
-                                    />
-                                    <p className="text-[10px] text-muted-foreground">Optional: Upload latest bank statement</p>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <label htmlFor="message" className="text-sm font-medium">Message (Optional)</label>
-                                    <Textarea
-                                        id="message"
-                                        name="message"
-                                        value={formData.message}
-                                        onChange={handleChange}
-                                        placeholder="Any additional details or questions..."
-                                        className="min-h-[100px] bg-background"
-                                    />
-                                </div>
-
-                                {submitStatus === "success" && (
-                                    <div className="bg-green-500/10 border border-green-500/20 text-green-500 px-4 py-3 rounded-md text-sm">
-                                        Application submitted successfully! Our team will contact you shortly.
-                                    </div>
-                                )}
-
-                                {submitStatus === "error" && (
-                                    <div className="bg-destructive/10 border border-destructive/20 text-destructive px-4 py-3 rounded-md text-sm">
-                                        {errorMessage || "Something went wrong during upload. Please ensure files are not too large and try again."}
-                                    </div>
-                                )}
-
-                                <Button
-                                    type="submit"
-                                    size="lg"
-                                    className="w-full bg-[#f26726] hover:bg-[#d9561d] text-white font-bold"
-                                    disabled={isSubmitting}
-                                >
-                                    {isSubmitting ? "Uploading Documents..." : "Submit Application"}
-                                </Button>
-                            </form>
-                        </CardContent>
-                    </Card>
+                    <div className="flex-shrink-0">
+                        <Link href="/sohailyousafedu/accountopening">
+                            <Button size="lg" className="bg-gradient-to-r from-[#f26726] to-orange-500 hover:from-orange-500 hover:to-orange-400 text-white font-bold text-lg px-8 py-7 rounded-xl shadow-[0_0_30px_rgba(242,103,38,0.3)] hover:shadow-[0_0_40px_rgba(242,103,38,0.5)] transform transition-all hover:scale-105 border border-orange-500/20 flex items-center gap-3">
+                                Open Trading Account
+                                <ArrowRight className="w-5 h-5" />
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
-            </section >
+            </section>
+
+            {/* Training Program Enrollment Section */}
+            <section className="relative py-16 md:py-24 bg-background border-t border-border/10 overflow-hidden">
+                <div className="absolute inset-0 bg-orange-500/5 -z-10" />
+                <div className="container relative z-10 px-4 md:px-6 flex flex-col lg:flex-row items-center justify-between gap-12 max-w-6xl mx-auto">
+
+                    <div className="flex-1 space-y-6 text-center lg:text-left">
+                        <div className="inline-flex items-center px-4 py-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 text-orange-500 text-sm font-medium backdrop-blur-sm">
+                            <GraduationCap className="w-4 h-4 mr-2" />
+                            Premium Certification
+                        </div>
+                        <h2 className="text-3xl md:text-5xl font-bold font-serif leading-tight">
+                            Master the Markets with Professional Training
+                        </h2>
+                        <ul className="text-lg text-muted-foreground space-y-3 mx-auto lg:mx-0 max-w-lg text-left inline-block">
+                            <li className="flex items-center gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-green-500" />
+                                <span>Get a <strong>recognized certificate</strong> upon completion</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-green-500" />
+                                <span>Comprehensive 1.5-month curriculum</span>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <CheckCircle2 className="w-5 h-5 text-green-500" />
+                                <span><strong>Special 20% discounts</strong> for students & existing clients</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div className="lg:w-1/3 w-full max-w-sm rounded-2xl bg-gradient-to-b from-slate-900 to-black p-8 shadow-2xl border border-orange-500/20 text-center relative group">
+                        <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-yellow-500 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+                        <div className="relative">
+                            <h3 className="text-2xl font-bold text-white mb-2">Join the Academy</h3>
+                            <p className="text-slate-400 mb-8 text-sm">Limited seats available for personalized mentoring.</p>
+                            <Link href="/registration" className="block w-full">
+                                <Button size="lg" className="w-full bg-[#f26726] hover:bg-[#d9561d] text-white font-bold text-lg py-6 rounded-xl shadow-lg shadow-orange-500/20 border border-orange-500/50 group-hover:scale-105 transition-transform">
+                                    View Program Details
+                                </Button>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             {/* Affiliations Ticker Section */}
             < section className="py-12 bg-muted/20 border-t border-border/10 overflow-hidden" >
