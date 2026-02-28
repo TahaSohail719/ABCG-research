@@ -36,6 +36,25 @@ export default function EnrollmentPage() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (clientType === "student" && !files.studentCard) {
+            setErrorMessage("Please upload your Student ID Card / Enrollment Evidence.");
+            setSubmitStatus("error");
+            document.getElementById('studentCardContainer')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        if (!files.paymentReceipt) {
+            setErrorMessage("Please upload your Payment Screenshot Receipt.");
+            setSubmitStatus("error");
+            document.getElementById('paymentReceiptContainer')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        if (clientType === "existing" && !formData.tradingAccountNumber) {
+            setErrorMessage("Please provide your Trading Account Number.");
+            setSubmitStatus("error");
+            return;
+        }
+
         setIsSubmitting(true);
         try {
             const formDataToSend = new FormData();
@@ -231,10 +250,10 @@ export default function EnrollmentPage() {
 
                                 {/* Conditional Fields */}
                                 {clientType === "student" && (
-                                    <div className="space-y-2 md:col-span-2 animate-in fade-in slide-in-from-top-2">
+                                    <div id="studentCardContainer" className="space-y-2 md:col-span-2 animate-in fade-in slide-in-from-top-2">
                                         <label className="text-sm font-medium text-slate-300">Student ID Card / Enrollment Evidence *</label>
                                         <div className="border-2 border-dashed border-slate-700 bg-slate-950 rounded-xl p-4 text-center hover:border-orange-500/50 transition-colors">
-                                            <input type="file" required name="studentCard" onChange={handleFileChange} id="studentCard" className="hidden" accept="image/*,.pdf" />
+                                            <input type="file" name="studentCard" onChange={handleFileChange} id="studentCard" className="hidden" accept="image/*,.pdf" />
                                             <label htmlFor="studentCard" className="cursor-pointer flex flex-col items-center justify-center gap-2">
                                                 <UploadCloud className="w-8 h-8 text-orange-500" />
                                                 <span className="text-sm text-slate-300 font-medium bg-slate-800 px-4 py-1.5 rounded-lg hover:bg-slate-700 transition">
@@ -305,10 +324,10 @@ export default function EnrollmentPage() {
                                 </div>
                             </div>
 
-                            <div className="space-y-2">
+                            <div id="paymentReceiptContainer" className="space-y-2">
                                 <label className="text-sm font-medium text-slate-300">Payment Screenshot Receipt *</label>
                                 <div className="border-2 border-dashed border-slate-700 bg-slate-950 rounded-xl p-6 text-center hover:border-orange-500/50 transition-colors">
-                                    <input type="file" required name="paymentReceipt" onChange={handleFileChange} id="paymentReceipt" className="hidden" accept="image/*,.pdf" />
+                                    <input type="file" name="paymentReceipt" onChange={handleFileChange} id="paymentReceipt" className="hidden" accept="image/*,.pdf" />
                                     <label htmlFor="paymentReceipt" className="cursor-pointer flex flex-col items-center justify-center gap-2">
                                         <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mb-2">
                                             <UploadCloud className="w-6 h-6 text-orange-500" />

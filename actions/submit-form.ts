@@ -48,7 +48,7 @@ export async function submitForm(type: 'Contact Us' | 'Medisure' | 'Contact' | '
         const jsonBlob = blobs.find((b) => b.pathname === SUBMISSIONS_JSON_PATH);
 
         if (jsonBlob) {
-            const res = await fetch(jsonBlob.url, { cache: 'no-store' });
+            const res = await fetch(`${jsonBlob.url}?t=${Date.now()}`, { cache: 'no-store' });
             if (res.ok) {
                 submissions = await res.json();
             }
@@ -96,7 +96,7 @@ async function fetchLatestSubmissions(): Promise<Submission[]> {
         const jsonBlob = blobs.find((b) => b.pathname === SUBMISSIONS_JSON_PATH);
 
         if (jsonBlob) {
-            const res = await fetch(jsonBlob.url, { cache: 'no-store' });
+            const res = await fetch(`${jsonBlob.url}?t=${Date.now()}`, { cache: 'no-store' });
             if (res.ok) {
                 return await res.json();
             }
