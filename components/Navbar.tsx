@@ -90,7 +90,7 @@ export function Navbar() {
                 {!isEduPage && !isRegistrationPage && (
                     <div className="hidden md:flex items-center gap-4">
                         <ModeToggle />
-                        <Link href="/contact">
+                        <Link href={isMedisure ? "/medisure/contact" : "/contact"}>
                             <Button>Contact Us</Button>
                         </Link>
                     </div>
@@ -165,7 +165,7 @@ export function Navbar() {
                             {/* Mobile Footer Area */}
                             {!isEduPage && !isRegistrationPage && (
                                 <div className="p-6 border-t border-border/10 bg-muted/5 space-y-6">
-                                    <Link href="/contact" onClick={() => setIsOpen(false)}>
+                                    <Link href={isMedisure ? "/medisure/contact" : "/contact"} onClick={() => setIsOpen(false)}>
                                         <Button className="w-full text-base font-semibold py-6 shadow-lg shadow-primary/20" size="lg">
                                             Contact Us
                                         </Button>

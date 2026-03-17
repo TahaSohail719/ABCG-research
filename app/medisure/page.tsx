@@ -25,6 +25,7 @@ export default function MedisurePage() {
         firstName: "",
         middleName: "",
         lastName: "",
+        organization: "",
         email: "",
         message: ""
     });
@@ -37,13 +38,14 @@ export default function MedisurePage() {
             formDataToSend.append('firstName', formData.firstName);
             formDataToSend.append('middleName', formData.middleName);
             formDataToSend.append('lastName', formData.lastName);
+            formDataToSend.append('organization', formData.organization);
             formDataToSend.append('email', formData.email);
             formDataToSend.append('message', formData.message);
 
             await submitForm('Medisure', formDataToSend);
 
             alert("Thank you! Your inquiry has been received.");
-            setFormData({ firstName: "", middleName: "", lastName: "", email: "", message: "" });
+            setFormData({ firstName: "", middleName: "", lastName: "", organization: "", email: "", message: "" });
         } catch (error) {
             console.error(error);
             alert("Failed to submit form. Please try again.");
@@ -68,15 +70,15 @@ export default function MedisurePage() {
                     <div className="inline-block px-4 py-1.5 mb-6 text-sm font-medium tracking-wider text-primary uppercase bg-primary/10 rounded-full border border-primary/20 backdrop-blur-sm">
                         A Division of ABCG Research
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-bold font-serif mb-6 tracking-tight max-w-4xl mx-auto">
-                        MediSure
+                    <h1 className="text-4xl md:text-5xl font-bold font-serif mb-6 tracking-tight max-w-3xl mx-auto leading-tight">
+                        Empowering Healthcare Providers with Reliable Outsourcing Solutions
                     </h1>
-                    <p className="text-2xl md:text-3xl text-primary font-medium mb-8">
-                        Where HealthCare Meets Eminent Billing
+                    <p className="text-xl md:text-2xl text-primary font-medium mb-8 max-w-4xl mx-auto leading-relaxed">
+                        Medisure delivers high-quality healthcare outsourcing and virtual support services designed to help medical practices operate more efficiently, reduce administrative burdens, and focus on patient care.
                     </p>
                     <div className="flex justify-center">
                         <Button asChild size="lg" className="bg-[#f26726] hover:bg-[#d9561d] text-white px-10 h-14 rounded-2xl text-lg font-bold shadow-xl shadow-orange-500/20 transition-all hover:scale-105 active:scale-95">
-                            <Link href="#audit">Get Your Free Billing Audit <ArrowRight className="ml-2 w-5 h-5" /></Link>
+                            <Link href="#audit">Schedule a Free Consultation <ArrowRight className="ml-2 w-5 h-5" /></Link>
                         </Button>
                     </div>
                 </div>
@@ -88,9 +90,17 @@ export default function MedisurePage() {
                     <div>
                         <h2 className="text-3xl md:text-4xl font-bold font-serif mb-6">About MediSure</h2>
                         <h3 className="text-xl text-primary font-semibold mb-4 italic">Precision Billing for Modern Healthcare</h3>
-                        <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                            MediSure is a dedicated division of ABCG Research, created to empower healthcare providers with efficient and transparent medical billing solutions. Backed by our financial and operational expertise, MediSure ensures accuracy, compliance, and consistency across your revenue cycle.
-                        </p>
+                        <div className="text-lg text-muted-foreground mb-8 leading-relaxed space-y-4">
+                            <p>
+                                Medisure is a professional healthcare outsourcing and virtual support company dedicated to assisting healthcare providers, clinics, and businesses with efficient administrative solutions.
+                            </p>
+                            <p>
+                                Our experienced team specializes in managing complex operational tasks such as medical billing, insurance verification, documentation management, and administrative support.
+                            </p>
+                            <p>
+                                By partnering with Medisure, organizations can reduce costs, increase operational efficiency, and focus on delivering exceptional patient care.
+                            </p>
+                        </div>
                         <div className="space-y-6">
                             <div className="flex items-start gap-4 p-4 rounded-2xl bg-muted/30 border border-border/50">
                                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
@@ -133,7 +143,7 @@ export default function MedisurePage() {
                         </div>
                         <div className="space-y-4">
                             <div className="bg-blue-600/10 p-8 rounded-3xl border border-blue-600/20">
-                                <p className="text-4xl font-bold text-blue-600 mb-2">6+</p>
+                                <p className="text-4xl font-bold text-blue-600 mb-2">10+</p>
                                 <p className="text-sm font-medium text-muted-foreground">Years of Experience</p>
                             </div>
                             <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
@@ -150,28 +160,31 @@ export default function MedisurePage() {
                     <h2 className="text-4xl font-bold font-serif mb-4">Our Core Services</h2>
                     <div className="h-1.5 w-24 bg-primary mx-auto rounded-full mb-6" />
                 </div>
-                <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-8 md:grid-cols-2">
                     <Card className="bg-background border border-border/50 shadow-lg hover:border-primary/50 transition-all group">
                         <CardHeader className="flex flex-col items-center text-center">
                             <div className="w-14 h-14 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500 mb-4 group-hover:scale-110 transition-transform mx-auto">
-                                <ReceiptText className="w-8 h-8" />
+                                <ShieldCheck className="w-8 h-8" />
                             </div>
-                            <CardTitle className="font-serif text-xl">End-to-End Medical Billing</CardTitle>
+                            <CardTitle className="font-serif text-2xl text-center w-full">Healthcare Outsourcing Services</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <ul className="space-y-3 text-sm text-muted-foreground">
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Clean and accurate claim submission.
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Timely payment posting.
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Effective denial resolution.
-                                </li>
+                            <ul className="space-y-4 text-sm text-muted-foreground text-left max-w-md mx-auto">
+                                {[
+                                    "Medical Billing & Coding",
+                                    "Insurance Verification",
+                                    "Prior Authorization Management",
+                                    "Medical Transcription",
+                                    "Patient Appointment Scheduling",
+                                    "Electronic Medical Records (EMR) Management",
+                                    "Revenue Cycle Management (RCM)",
+                                    "Medical Data Entry & Documentation Support"
+                                ].map((service, idx) => (
+                                    <li key={idx} className="flex items-start gap-3">
+                                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                                        <span className="text-base">{service}</span>
+                                    </li>
+                                ))}
                             </ul>
                         </CardContent>
                     </Card>
@@ -179,74 +192,26 @@ export default function MedisurePage() {
                     <Card className="bg-background border border-border/50 shadow-lg hover:border-primary/50 transition-all group">
                         <CardHeader className="flex flex-col items-center text-center">
                             <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center text-cyan-500 mb-4 group-hover:scale-110 transition-transform mx-auto">
-                                <BarChart3 className="w-8 h-8" />
+                                <Users className="w-8 h-8" />
                             </div>
-                            <CardTitle className="font-serif text-xl">Reporting & Analytics</CardTitle>
+                            <CardTitle className="font-serif text-2xl text-center w-full">Virtual Assistant Services</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <ul className="space-y-3 text-sm text-muted-foreground">
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Collection trend reports.
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Denial pattern insights.
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Performance dashboards.
-                                </li>
-                            </ul>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="bg-background border border-border/50 shadow-lg hover:border-primary/50 transition-all group">
-                        <CardHeader className="flex flex-col items-center text-center">
-                            <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-indigo-500 mb-4 group-hover:scale-110 transition-transform mx-auto">
-                                <Clock className="w-8 h-8" />
-                            </div>
-                            <CardTitle className="font-serif text-xl">AR Follow-up</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <ul className="space-y-3 text-sm text-muted-foreground">
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Insurance claim follow-up.
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Patient balance reminders.
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Reduced aging accounts.
-                                </li>
-                            </ul>
-                        </CardContent>
-                    </Card>
-
-                    <Card className="bg-background border border-border/50 shadow-lg hover:border-primary/50 transition-all group">
-                        <CardHeader className="flex flex-col items-center text-center">
-                            <div className="w-14 h-14 rounded-2xl bg-violet-500/10 flex items-center justify-center text-violet-500 mb-4 group-hover:scale-110 transition-transform mx-auto">
-                                <ClipboardCheck className="w-8 h-8" />
-                            </div>
-                            <CardTitle className="font-serif text-xl">Provider Credentialing</CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                            <ul className="space-y-3 text-sm text-muted-foreground">
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    New provider enrollments.
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Seamless re-credentialing.
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <CheckCircle2 className="w-4 h-4 text-primary" />
-                                    Compliance monitoring.
-                                </li>
+                            <ul className="space-y-4 text-sm text-muted-foreground text-left max-w-md mx-auto">
+                                {[
+                                    "Administrative Support",
+                                    "Email and Calendar Management",
+                                    "Customer Service Support",
+                                    "Data Entry & Data Management",
+                                    "CRM Management",
+                                    "Appointment Coordination",
+                                    "Business Process Support"
+                                ].map((service, idx) => (
+                                    <li key={idx} className="flex items-start gap-3">
+                                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                                        <span className="text-base">{service}</span>
+                                    </li>
+                                ))}
                             </ul>
                         </CardContent>
                     </Card>
@@ -268,33 +233,20 @@ export default function MedisurePage() {
                         </div>
                         <div>
                             <h2 className="text-3xl md:text-4xl font-bold font-serif mb-8">Why Choose MediSure</h2>
-                            <div className="grid gap-6">
+                            <div className="grid gap-4">
                                 {[
-                                    {
-                                        title: "99% claim accuracy rate",
-                                        desc: "Minimizing denials and maximizing reimbursements."
-                                    },
-                                    {
-                                        title: "Transparent reporting and communication",
-                                        desc: "Real-time dashboards and dedicated account managers."
-                                    },
-                                    {
-                                        title: "U.S. compliance & certified billers",
-                                        desc: "HIPAA, ICD-10, CPT experts with annual audits."
-                                    },
-                                    {
-                                        title: "Personalized service backed by ABCG Research’s analytical expertise",
-                                        desc: "Tailored strategies for your practice."
-                                    }
+                                    "Experienced Healthcare Professionals",
+                                    "Cost-Effective Outsourcing Solutions",
+                                    "Strict Data Security & Confidentiality",
+                                    "High Accuracy & Quality Assurance",
+                                    "Flexible Staffing Solutions",
+                                    "Dedicated Client Support"
                                 ].map((item, i) => (
-                                    <div key={i} className="flex gap-4">
-                                        <div className="mt-1">
-                                            <CheckCircle2 className="w-6 h-6 text-primary" />
+                                    <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-background/50 border border-border/50 hover:border-primary/50 transition-colors">
+                                        <div className="bg-primary/10 p-2 rounded-full">
+                                            <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0" />
                                         </div>
-                                        <div>
-                                            <h4 className="font-bold text-lg mb-1">{item.title}</h4>
-                                            <p className="text-muted-foreground">{item.desc}</p>
-                                        </div>
+                                        <span className="font-semibold text-lg">{item}</span>
                                     </div>
                                 ))}
                             </div>
@@ -330,7 +282,7 @@ export default function MedisurePage() {
                     <div className="bg-background border border-border/50 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl -mr-16 -mt-16" />
                         <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
-                            <div className="grid gap-4 sm:grid-cols-3">
+                            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium">First Name *</label>
                                     <Input
@@ -338,15 +290,6 @@ export default function MedisurePage() {
                                         placeholder="John"
                                         value={formData.firstName}
                                         onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                                        className="bg-muted/30 border-border/50"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium">Middle Name</label>
-                                    <Input
-                                        placeholder="Q."
-                                        value={formData.middleName}
-                                        onChange={(e) => setFormData({ ...formData, middleName: e.target.value })}
                                         className="bg-muted/30 border-border/50"
                                     />
                                 </div>
@@ -360,6 +303,16 @@ export default function MedisurePage() {
                                         className="bg-muted/30 border-border/50"
                                     />
                                 </div>
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-sm font-medium">Organization Name *</label>
+                                <Input
+                                    required
+                                    placeholder="Your Company/Clinic"
+                                    value={formData.organization}
+                                    onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                                    className="bg-muted/30 border-border/50"
+                                />
                             </div>
                             <div className="space-y-2">
                                 <label className="text-sm font-medium">Email *</label>

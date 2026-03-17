@@ -14,6 +14,11 @@ export function middleware(request: NextRequest) {
       url.pathname = '/medisure';
       return NextResponse.rewrite(url);
     }
+    // If we're at the contact page of the medisure domain, rewrite to the /medisure/contact page
+    if (url.pathname === '/contact') {
+      url.pathname = '/medisure/contact';
+      return NextResponse.rewrite(url);
+    }
   }
 
   // Otherwise, proceed as normal
