@@ -24,16 +24,36 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
-    const isMedisure = pathname === "/medisure";
+    const isMedisure = pathname.startsWith("/medisure");
     const isEduPage = pathname === "/sohailyousafedu";
     const isRegistrationPage = pathname.startsWith("/registration");
+
+    const navLinksToDisplay = NAV_LINKS
+        .filter(link => {
+            if (isMedisure && ["Services", "Research", "About Us"].includes(link.title)) {
+                return false;
+            }
+            return true;
+        })
+        .map(link => {
+            if (isMedisure && link.title === "Associate Companies") {
+                return {
+                    ...link,
+                    items: [
+                        { title: "ABCG.io", href: "https://abcg.io" },
+                        { title: "ABCG Research", href: "https://abcgresearch.com" }
+                    ]
+                };
+            }
+            return link;
+        });
     const logoSrc = isMedisure ? "/medisure-logo.png" : "/logo-header.png";
     const logoAlt = isMedisure ? "MediSure" : "ABCG Research Logo";
 
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-                <Link href="/" className="mr-6 flex items-center space-x-2">
+                <Link href={isMedisure ? "/medisure" : "/"} className="mr-6 flex items-center space-x-2">
                     <Image
                         src={logoSrc}
                         alt={logoAlt}
@@ -47,7 +67,7 @@ export function Navbar() {
                     {!isRegistrationPage ? (
                         <NavigationMenu viewport={false}>
                             <NavigationMenuList>
-                                {NAV_LINKS.map((link) => (
+                                {navLinksToDisplay.map((link) => (
                                     <NavigationMenuItem key={link.title}>
                                         {link.items ? (
                                             <>
@@ -118,7 +138,7 @@ export function Navbar() {
                         <div className="flex flex-col h-full">
                             {/* Mobile Header with Logo */}
                             <div className="p-6 border-b border-border/10">
-                                <Link href="/" onClick={() => setIsOpen(false)}>
+                                <Link href={isMedisure ? "/medisure" : "/"} onClick={() => setIsOpen(false)}>
                                     <Image
                                         src={logoSrc}
                                         alt={logoAlt}
@@ -131,7 +151,7 @@ export function Navbar() {
 
                             {/* Navigation Links */}
                             <nav className="flex-1 overflow-y-auto py-6 px-6 flex flex-col gap-6">
-                                {!isRegistrationPage && NAV_LINKS.map((link) => (
+                                {!isRegistrationPage && navLinksToDisplay.map((link) => (
                                     <div key={link.title} className="flex flex-col gap-3">
                                         {link.items ? (
                                             <>

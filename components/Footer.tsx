@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 export function Footer() {
     const pathname = usePathname();
 
-    const isMedisure = pathname === '/medisure';
+    const isMedisure = pathname.startsWith('/medisure');
 
     const getLocations = () => {
         let locations = [...FOOTER_INFO.locations];
@@ -125,10 +125,14 @@ export function Footer() {
                 <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
                     <p>&copy; {FOOTER_INFO.copyright} All rights reserved.</p>
                     <div className="flex gap-6">
-                        <Link href="/about" className="hover:text-primary transition-colors">About</Link>
-                        <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
-                        <Link href="/research" className="hover:text-primary transition-colors">Research</Link>
-                        <Link href="/contact" className="hover:text-primary transition-colors">Contact</Link>
+                        {!isMedisure && (
+                            <>
+                                <Link href="/about" className="hover:text-primary transition-colors">About</Link>
+                                <Link href="/services" className="hover:text-primary transition-colors">Services</Link>
+                                <Link href="/research" className="hover:text-primary transition-colors">Research</Link>
+                            </>
+                        )}
+                        <Link href={isMedisure ? "/medisure/contact" : "/contact"} className="hover:text-primary transition-colors">Contact</Link>
                     </div>
                 </div>
             </div>
