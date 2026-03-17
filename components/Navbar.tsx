@@ -21,12 +21,17 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
+export function Navbar({ isMedisureHost = false }: { isMedisureHost?: boolean }) {
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
-    const isMedisure = pathname.startsWith("/medisure");
+    const isMedisurePath = pathname.startsWith("/medisure");
+    const isMedisureDomain = isMedisureHost;
+    const isMedisure = isMedisurePath || isMedisureDomain;
     const isEduPage = pathname === "/sohailyousafedu";
     const isRegistrationPage = pathname.startsWith("/registration");
+
+    const homeUrl = isMedisureDomain ? "/" : (isMedisurePath ? "/medisure" : "/");
+    const contactUrl = isMedisureDomain ? "/contact" : (isMedisurePath ? "/medisure/contact" : "/contact");
 
     const navLinksToDisplay = NAV_LINKS
         .filter(link => {
@@ -53,7 +58,7 @@ export function Navbar() {
     return (
         <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-                <Link href={isMedisure ? "/medisure" : "/"} className="mr-6 flex items-center space-x-2">
+                <Link href={homeUrl} className="mr-6 flex items-center space-x-2">
                     <Image
                         src={logoSrc}
                         alt={logoAlt}
@@ -110,7 +115,7 @@ export function Navbar() {
                 {!isEduPage && !isRegistrationPage && (
                     <div className="hidden md:flex items-center gap-4">
                         <ModeToggle />
-                        <Link href={isMedisure ? "/medisure/contact" : "/contact"}>
+                        <Link href={contactUrl}>
                             <Button>Contact Us</Button>
                         </Link>
                     </div>
@@ -138,7 +143,7 @@ export function Navbar() {
                         <div className="flex flex-col h-full">
                             {/* Mobile Header with Logo */}
                             <div className="p-6 border-b border-border/10">
-                                <Link href={isMedisure ? "/medisure" : "/"} onClick={() => setIsOpen(false)}>
+                                <Link href={homeUrl} onClick={() => setIsOpen(false)}>
                                     <Image
                                         src={logoSrc}
                                         alt={logoAlt}
@@ -185,7 +190,7 @@ export function Navbar() {
                             {/* Mobile Footer Area */}
                             {!isEduPage && !isRegistrationPage && (
                                 <div className="p-6 border-t border-border/10 bg-muted/5 space-y-6">
-                                    <Link href={isMedisure ? "/medisure/contact" : "/contact"} onClick={() => setIsOpen(false)}>
+                                    <Link href={contactUrl} onClick={() => setIsOpen(false)}>
                                         <Button className="w-full text-base font-semibold py-6 shadow-lg shadow-primary/20" size="lg">
                                             Contact Us
                                         </Button>

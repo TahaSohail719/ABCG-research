@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { headers } from "next/headers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,11 +60,22 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let isMedisureDomain = false;
+  try {
+    const headersList = await headers();
+    const host = headersList.get("host") || "";
+    if (host.includes("medisurellc.com")) {
+      isMedisureDomain = true;
+    }
+  } catch (error) {
+    // Ignore errors during static generation
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -77,11 +89,11 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="w-full max-w-7xl mx-auto flex flex-col min-h-screen shadow-2xl bg-background border-x border-border/50">
-            <Navbar />
+            <Navbar isMedisureHost={isMedisureDomain} />
             <main className="flex-1 w-full">
               {children}
             </main>
-            <Footer />
+            <Footer isMedisureHost={isMedisureDomain} />
           </div>
         </ThemeProvider>
       </body>

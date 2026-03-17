@@ -6,10 +6,14 @@ import { FOOTER_INFO } from "@/lib/constants";
 import { Linkedin, Instagram } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-export function Footer() {
+export function Footer({ isMedisureHost = false }: { isMedisureHost?: boolean }) {
     const pathname = usePathname();
 
-    const isMedisure = pathname.startsWith('/medisure');
+    const isMedisurePath = pathname.startsWith('/medisure');
+    const isMedisureDomain = isMedisureHost;
+    const isMedisure = isMedisurePath || isMedisureDomain;
+    
+    const contactUrl = isMedisureDomain ? "/contact" : (isMedisurePath ? "/medisure/contact" : "/contact");
 
     const getLocations = () => {
         let locations = [...FOOTER_INFO.locations];
@@ -132,7 +136,7 @@ export function Footer() {
                                 <Link href="/research" className="hover:text-primary transition-colors">Research</Link>
                             </>
                         )}
-                        <Link href={isMedisure ? "/medisure/contact" : "/contact"} className="hover:text-primary transition-colors">Contact</Link>
+                        <Link href={contactUrl} className="hover:text-primary transition-colors">Contact</Link>
                     </div>
                 </div>
             </div>
