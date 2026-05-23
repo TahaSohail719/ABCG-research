@@ -29,7 +29,7 @@ export function Hero() {
                 </h1>
 
                 <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
-                    Navigate the markets with real-time AI analysis through <span className="text-brand-navy font-bold">AlphaLens AI</span>, powered by our research models.
+                    Navigate the markets with real-time AI analysis through <span className="text-brand-navy dark:text-white font-bold">AlphaLens AI</span>, powered by our research models.
                 </p>
 
                 <div className="flex flex-wrap items-center justify-center gap-4">

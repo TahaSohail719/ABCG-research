@@ -23,7 +23,7 @@ export default function EnrollmentPage() {
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
     const [errorMessage, setErrorMessage] = useState("");
 
-    const BASE_PRICE = 12000;
+    const BASE_PRICE = 25000;
     const DISCOUNT_RATE = 0.2;
 
     const finalPrice = clientType === "new" ? BASE_PRICE : BASE_PRICE * (1 - DISCOUNT_RATE);
